@@ -3,7 +3,7 @@ body{
 }
 
 .form-background {
-    background-image: url(../images/start/img_welcomeLG.png);
+    background-image: url(../images/start/img_welcome.png);
     background-repeat: no-repeat;
     background-size:cover;
     min-height: 662px;
