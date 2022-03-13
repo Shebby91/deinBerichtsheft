@@ -4,7 +4,7 @@ include dirname(__DIR__).'/header.phtml';
 <div class="container-fluid form-background shadow">
     <div class="row justify-content-center">
         <div class="col-11 col-sm-9 col-md-7 col-lg-5 col-xl-4 px-0">
-            <div class="card card-start text-start my-5 shadow">
+            <div class="card card-start card-login text-start my-5 shadow">
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs">
                     <li class="nav-item">
@@ -16,7 +16,7 @@ include dirname(__DIR__).'/header.phtml';
                     </ul>
                 </div>
                 <div class="card-body">
-                    <form method="post">
+                    <form id="loginForm" method="post">
                         <?php foreach ($labels as $index => $value): ?>
                             <div class="mb-3">
                             <label class="form-label" for="<?=$index?>"><?=$value?></label>
@@ -32,10 +32,20 @@ include dirname(__DIR__).'/header.phtml';
                         <?php endforeach; ?>                              
                         <input type="hidden" name="controller" value="login">       
                         <input type="hidden" name="do" value="validateForm">
-                        <div class="d-flex justify-content-center">
-                            <input type="submit" class="btn btn-primary" name="submit" value="Absenden">
-                        </div>  
                     </form>
+                </div>
+                <div class="card-footer card-footer-custom">
+                    <div class="col-12 text-start">
+                        <a class="text-decoration-none d-flex" href="#">
+                            <span class="material-icons py-1 pr-1">help_outline</span>
+                            <span class="p-1">Passwort vergessen?</span>
+                        </a>
+                    </div>  
+                </div>
+                <div class="card-footer text-muted">
+                    <div class="col-12 text-center">
+                        <input type="submit" form="loginForm" class="btn btn-primary" name="submit" value="Absenden">
+                    </div>  
                 </div>
             </div>
         </div>
