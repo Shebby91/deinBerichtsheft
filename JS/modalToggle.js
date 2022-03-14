@@ -1,0 +1,4 @@
+var myModal = new bootstrap.Modal(document.getElementById('staticBackdrop'), {})
+myModal.show();
+setTimeout(function(){ myModal.hide(); }, 1500);
+

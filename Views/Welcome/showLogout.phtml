@@ -1,14 +1,32 @@
 <?php
 include dirname(__DIR__).'/header.phtml';
 ?>    
-<div class="container">
-    <div class="row pt-5 px-2">
-        <div class="col-12">
-            <h2>
-                Du wurdest ausgeloggt!
-            </h2> 
-            <a href="?controller=Login&do=showLoginForm">Hier geht's zum Login.</a>
-        </div>
+
+<div class="modal" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body row align-items-center">
+          <div class="col-12 text-center">
+            <div class="spinner-grow text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <h4 class="text-muted">Du wirst jetzt ausgeloggt...</h4>
+          </div>
+      </div>
     </div>
+  </div>
 </div>
-<?php include dirname(__DIR__).'/footer.phtml'; ?>
+
+<div class="outer">
+  <div class="middle">
+    <div class="col-12 text-center mx-auto">
+        <h2 class="text-secondary">
+            Du wurdest ausgeloggt!
+        </h2> 
+        <a href="?controller=Login&do=showLoginForm">Hier geht's zum Login.</a>
+    </div>
+  </div>
+</div>
+<?php include dirname(__DIR__).'/footer.phtml';?>
+<?php include dirname(__DIR__).'/Includes/modalToggle.phtml'; ?>
+<?php include dirname(__DIR__).'/footerEnd.phtml'; ?>

@@ -1,14 +1,33 @@
 <?php
 include dirname(__DIR__).'/header.phtml';
 ?>    
-<div class="container">
-    <div class="row pt-5 px-2">
-        <div class="col-12">
-            <h2>
-                Eingeloggt als <?php echo $_SESSION["userName"]; ?>
-            </h2>
-            <a href="?controller=Welcome&do=showWelcome">Hier geht's weiter</a>
-        </div>
+
+<div class="modal" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body row align-items-center">
+          <div class="col-12 text-center">
+            <div class="spinner-grow text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <h4 class="text-muted">Du wirst jetzt eingeloggt...</h4>
+          </div>
+      </div>
     </div>
+  </div>
 </div>
+
+<div class="outer">
+  <div class="middle">
+    <div class="col-12 text-center mx-auto">
+        <h2 class="text-secondary">
+            Herzlich Willkommen <?php echo $_SESSION["userName"]; ?>
+        </h2> 
+        <a href="?controller=Welcome&do=showWelcome">Hier geht's zu deiner persönlichen Startseite</a>
+    </div>
+  </div>
+</div>
+
 <?php include dirname(__DIR__).'/footer.phtml'; ?>
+<?php include dirname(__DIR__).'/Includes/modalToggle.phtml'; ?>
+<?php include dirname(__DIR__).'/footerEnd.phtml'; ?>
