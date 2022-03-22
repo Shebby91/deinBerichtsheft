@@ -4,7 +4,7 @@ namespace deinBerichtsheft\Model;
 use PDO;
 use PDOException;
 
-class LoginModel extends Database
+class UserModel extends Database
 {
     public function checkEmailExist($values)
     {
@@ -60,7 +60,7 @@ class LoginModel extends Database
         return false;
     }
 
-    public function userLogin($values)
+    public function getUser($values)
     {
         $pdo = $this->linkDB();
 
@@ -89,5 +89,32 @@ class LoginModel extends Database
         }
 
         return false;
+    }
+
+    public function setUser($values)
+    {
+        $guid = $this->createUUID();
+
+        $sql = "INSERT INTO user (`userName`, `userEmail`, `userUid`, `userPwd`) VALUES (
+             :name, :email, :guid, :pwd);";
+
+        $hashedPwd = password_hash($values["userPwd"], PASSWORD_DEFAULT);
+
+        $pdo = $this->linkDB();
+
+        try {
+            $sth = $pdo->prepare($sql);
+            $sth->execute(array(
+                ":name" => $values["userName"],
+                ":email" => $values["userEmail"],
+                ":guid" => $guid,
+                ":pwd" => $hashedPwd));
+            $sth = null;
+        } catch (PDOException $e) {
+            new \deinBerichtsheft\Library\ErrorMsg("Fehler beim Schreiben der Daten.", $e); 
+            die;
+        }
+                
+        return true;
     }
 }

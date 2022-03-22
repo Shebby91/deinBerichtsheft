@@ -6,27 +6,20 @@ class WelcomeController
 {
     function showWelcome() {
         if(!isset($_SESSION["userUid"])) {
-            header("location: ../index.php?controller=Login&do=showLoginForm");
+            header("location: ../index.php?controller=User&do=showLoginForm");
         }
     }
 
     function showProjects() {
         if(!isset($_SESSION["userUid"])) {
-            header("location: ../index.php?controller=Login&do=showLoginForm");
+            header("location: ../index.php?controller=User&do=showLoginForm");
         }
     }
 
     function showTutorials() {
         if(!isset($_SESSION["userUid"])) {
-            header("location: ../index.php?controller=Login&do=showLoginForm");
+            header("location: ../index.php?controller=User&do=showLoginForm");
         }
     }
 
-    function showLogout() {
-        if(!isset($_SESSION["userUid"])) {
-            header("location: ../index.php?controller=Login&do=showLoginForm");
-        }
-        session_unset();
-        session_destroy();
-    }
 }
