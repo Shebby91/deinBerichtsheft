@@ -18,16 +18,26 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="true" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-            <div class="collapse navbar-collapse justify-content-between" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                    <a class="nav-link" href="?controller=Welcome&do=showWelcome">Willkommen</a>
-                    <a class="nav-link" href="?controller=Welcome&do=showProjects">Projekte</a>
-                    <a class="nav-link" href="?controller=Welcome&do=showTutorials">Tutorials</a>
+                <div class="collapse navbar-collapse justify-content-between" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                        <a class="nav-link" href="?controller=Welcome&do=showWelcome">Willkommen</a>
+                        <a class="nav-link" href="?controller=Welcome&do=showProjects">Projekte</a>
+                        <a class="nav-link" href="?controller=Welcome&do=showTutorials">Tutorials</a>
+                    </div>
+                    <div class="navbar-nav">
+                        <a class="nav-link" href="?controller=User&do=showLogout"><?php echo $_SESSION["userName"] ?> ausloggen</a>
+                    </div>
                 </div>
-                <div class="navbar-nav">
-                    <a class="nav-link" href="?controller=Welcome&do=showLogout"><?php echo $_SESSION["userName"] ?> ausloggen</a>
+            <?php } else { ?> 
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="true" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                    <a class="nav-link" href="?controller=User&do=showRegistrationForm">Registrierung</a>
+                        <a class="nav-link" href="?controller=User&do=showLoginForm">Einloggen</a>
+                    </div>
                 </div>
-            </div>
             <?php } ?>
         </div>
     </nav>

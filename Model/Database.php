@@ -32,8 +32,7 @@ abstract class Database {
             die;
         }
     }
-
-    
+  
     /**
      * Zum serverseitigen generieren einer UUID
      * 

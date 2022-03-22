@@ -12,10 +12,10 @@ $controllerName = "";
 $doMethodName = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $controllerName = isset($_POST['controller']) && $_POST['controller'] ? $_POST['controller'] : "Login";
+    $controllerName = isset($_POST['controller']) && $_POST['controller'] ? $_POST['controller'] : "User";
     $doMethodName = isset($_POST['do']) && $_POST['do'] ? $_POST['do'] : "showLoginForm";
 } else {
-    $controllerName = isset($_GET['controller']) && $_GET['controller'] ? $_GET['controller'] : "Login";
+    $controllerName = isset($_GET['controller']) && $_GET['controller'] ? $_GET['controller'] : "User";
     $doMethodName = isset($_GET['do']) && $_GET['do'] ? $_GET['do'] : "showLoginForm";
     
 }

@@ -8,30 +8,30 @@ include dirname(__DIR__).'/header.phtml';
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs">
                     <li class="nav-item">
-                            <a class="nav-link" href="?controller=Registration&do=showRegistrationForm">Registrierung</a>
+                            <a class="nav-link" href="?controller=User&do=showRegistrationForm">Registrierung</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="true" href="?controller=Login&do=showLoginForm">Einloggen</a>
+                            <a class="nav-link active" aria-current="true" href="?controller=User&do=showLoginForm">Einloggen</a>
                         </li>
                     </ul>
                 </div>
                 <div class="card-body">
                     <form id="loginForm" method="post">
-                        <?php foreach ($labels as $index => $value): ?>
+                        <?php foreach ($loginLabels as $index => $value): ?>
                             <div class="mb-3">
                             <label class="form-label" for="<?=$index?>"><?=$value?></label>
                             <?php if (substr($index,4,3) == "Pwd"): ?>
                                 <input type="password" class="form-control" id="<?=$index?>" name="<?=$index?>" placeholder="<?=$value?>" value="">
-                                <?php if (isset($errors[$index])): ?><div id="emailHelp" class="form-text"><?=$errors[$index]?></div><?php endif; ?>
+                                <?php if (isset($loginErrors[$index])): ?><div id="emailHelp" class="form-text"><?=$loginErrors[$index]?></div><?php endif; ?>
                             </div>
                             <?php else: ?>
                                 <input type="email" class="form-control" id="<?=$index?>" name="<?=$index?>" placeholder="<?=$value?>" value="">
-                                <?php if (isset($errors[$index])): ?><div id="emailHelp" class="form-text"><?=$errors[$index]?></div><?php endif; ?>
+                                <?php if (isset($loginErrors[$index])): ?><div id="emailHelp" class="form-text"><?=$loginErrors[$index]?></div><?php endif; ?>
                             </div>
                             <?php endif; ?>
                         <?php endforeach; ?>                              
-                        <input type="hidden" name="controller" value="login">       
-                        <input type="hidden" name="do" value="validateForm">
+                        <input type="hidden" name="controller" value="user">       
+                        <input type="hidden" name="do" value="validateLoginForm">
                     </form>
                 </div>
                 <div class="card-footer card-footer-custom">
@@ -53,4 +53,5 @@ include dirname(__DIR__).'/header.phtml';
 </div>
 <?php include dirname(__DIR__).'/marketing.phtml'; ?>
 <?php include dirname(__DIR__).'/footer.phtml'; ?>
+<?php include dirname(__DIR__).'/Includes/navbarActiveState.phtml'; ?>
 <?php include dirname(__DIR__).'/footerEnd.phtml'; ?>
