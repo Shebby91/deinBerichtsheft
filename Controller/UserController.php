@@ -48,7 +48,9 @@ class UserController
 
     public function showLoginConfirmation()
     {
-        
+        if(!isset($_SESSION["userUid"])) {
+            header("location: ../index.php?controller=User&do=showLoginForm");
+        }
     }
 
     function showLogout() {
