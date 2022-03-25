@@ -181,55 +181,52 @@ class UserModel extends Database
             $mail->setFrom('deinberichtsheftde@gmail.com', 'deinBerichtsheft.de');   
             $mail->addAddress('sgrauthoff@gmail.com');               //Name is optional
             $mail->addReplyTo('deinberichtsheftde@gmail.com', 'Support');
-            $mail->ContentType;
+            
 
             //Content
             $mail->isHTML(true);                                  //Set email format to HTML
-            $mail->Subject = 'Passwort zur&uuml;cksetzen';
-            $mail->Body    = '<html lang="en"><head>
-              <!-- Required meta tags -->
-              <meta charset="utf-8">
-              <meta name="viewport" content="width=device-width, initial-scale=1">    
-              <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-            </head>
-            <body class="d-flex flex-column h-100">
-             
-              <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-primary shadow">
-                <div class="container d-flex justify-content-center px-4">
-                    <span class="navbar-brand">deinBerichtsheft.de</span>
-                </div>
-            </nav>
-            <main class="flex-shrink-0">
-              <div class="container">
-                <div class="card shadow text-center mt-3">
-                    <div class="card-body">
-                      <h5 class="card-title">Passwort vergessen?</h5>
-                      <p class="card-text">Kein Problem, hier kannst du dein Passwort ändern:</p>
-                      <a class="btn btn-primary" href=' . $url . '>Passwort ändern</a>
-                    </div>
-                    <div class="card-footer text-muted">
-                        deinBerichtsheft.de
-                    </div>
-                </div>
-              </div>
-              </main>
-              <footer class="footer mt-auto py-3 px-4 bg-primary shadow-footer">
-                <div class="container d-flex justify-content-between">
-                  <a class="text-white text-decoration-none" href="#">Impressum</a>
-                  <a class="text-white text-decoration-none" href="#">Datenschutz</a>
-                </div>
-              </footer>
-              <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-            </body></html>';
+            $mail->Subject = 'Passwort ändern';
+            $mail->CharSet;
+            $mail->ContentType;
+            $mail->Body    = '
+              <body>
+                <div class="container">
+                  <h2 style="margin: 0px 0px 8px 0px; color: #666;">Du möchtest dein Passwort ändern?</h2>
+                  <h4 style="margin: 00px; color: #666;">Kein Problem, hier kannst du dein Passwort ändern:</h4><br>
+                  <a style="display: inline-block;
+                            font-weight: 400;
+                            line-height: 1.5;
+                            color: #212529;
+                            text-align: center;
+                            text-decoration: none;
+                            vertical-align: middle;
+                            cursor: pointer;
+                    	    -webkit-user-select: none;
+                    	    -moz-user-select: none;
+                    	    user-select: none;
+                    	    background-color: transparent;
+                    	    border: 1px solid transparent;
+                    	    padding: 0.375rem 0.75rem;
+                    	    font-size: 1rem;
+                    	    border-radius: 0.25rem;
+                    	    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+                            color: #fff;
+                            background-color: #0d6efd;
+                            border-color: #0d6efd;
+                            " href=' . $url . '>Passwort ändern</a><br><br><br>
+                  <span style="color: #666;">Liebe Grüße</span><br>
+                  <span style="color: #666;">deinBerichtsheft.de</span>
 
-        //$mail->send();
-        var_dump($url);
-  
-        } catch (PDOException $e) {
+                </div>
+              </body>';
+
+        $mail->send();
+
+        } catch (Exception $e) {
             new \deinBerichtsheft\Library\ErrorMsg("E-Mail konnte nicht gesendet werden. {$mail->ErrorInfo}"); 
             die;
         }
-
+        
         $_SESSION["pwdResetReqeuestSuccessfull"] = true;
         return true;
 
@@ -312,8 +309,9 @@ class UserModel extends Database
                 if($sth->rowCount() !== 0){
                     return false;
                 }
-
+                
                 $_SESSION["pwdResetSuccessfull"] = true;
+
                 return true;
             }
         }
@@ -343,6 +341,70 @@ class UserModel extends Database
             die;
         }
         
+        $mail = new PHPMailer(true);
+
+        try {
+            //Server settings
+            //Enable verbose debug output $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      
+            $mail->isSMTP();                                            //Send using SMTP
+            $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+            $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+            $mail->Username   = 'deinberichtsheftde@gmail.com';                     //SMTP username
+            $mail->Password   = 'dB.deietS';                               //SMTP password
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;             //Enable implicit TLS encryption
+            $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+        
+            //Recipients
+            $mail->setFrom('deinberichtsheftde@gmail.com', 'deinBerichtsheft.de');   
+            $mail->addAddress('sgrauthoff@gmail.com');               //Name is optional
+            $mail->addReplyTo('deinberichtsheftde@gmail.com', 'Support@deinBerichsheft.de');
+            
+
+            //Content
+            $mail->isHTML(true);                                  //Set email format to HTML
+            $mail->Subject = 'Erfolgreich registriert';
+            $mail->CharSet;
+            $mail->ContentType;
+            $mail->Body = '
+              <body>
+                <div class="container">
+                  <h2 style="margin: 0px 0px 8px 0px; color: #666;">Herzlichen Glückwunsch '.$values["userName"].'!</h2>
+                  <h4 style="margin: 0px; color: #666;">Du hast dich erfolgreich bei deinBerichtsheft.de registriert.<br>
+                  Viel Spaß beim Berichtsheft schreiben, hier geht\'s zum Login:</h4><br>
+                  <a style="display: inline-block;
+                            font-weight: 400;
+                            line-height: 1.5;
+                            color: #212529;
+                            text-align: center;
+                            text-decoration: none;
+                            vertical-align: middle;
+                            cursor: pointer;
+                    	    -webkit-user-select: none;
+                    	    -moz-user-select: none;
+                    	    user-select: none;
+                    	    background-color: transparent;
+                    	    border: 1px solid transparent;
+                    	    padding: 0.375rem 0.75rem;
+                    	    font-size: 1rem;
+                    	    border-radius: 0.25rem;
+                    	    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+                            color: #fff;
+                            background-color: #0d6efd;
+                            border-color: #0d6efd;
+                            "href="http://localhost/index.php?controller=User&do=showLoginForm">Einloggen</a><br><br><br>
+                  <span style="color: #666;">Liebe Grüße</span><br>
+                  <span style="color: #666;">deinBerichtsheft.de</span>
+
+                </div>
+              </body>';
+
+        $mail->send();
+
+        } catch (Exception $e) {
+            new \deinBerichtsheft\Library\ErrorMsg("Es ist ein Fehler aufgetreten. Bitte prüfe deiner Zugangsdaten. {$mail->ErrorInfo}"); 
+            die;
+        }
+       
         $_SESSION["registeredSuccessfully"] = true;
 
         return true;
