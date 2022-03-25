@@ -6,7 +6,7 @@ body{
     background-image: url(../images/start/img_welcome.png);
     background-repeat: no-repeat;
     background-size:cover;
-    min-height: 679px;
+    min-height: 727px;
 }
 
 .form-text{
@@ -17,12 +17,12 @@ body{
     opacity: 96%;
 }
 
-.card-login {
+.card-login, .card-pwd {
     min-height: 409px;
 }
 
 .card-registration {
-    min-height: 583px;
+    min-height: 631px;
 }
 
 .card-footer-custom {

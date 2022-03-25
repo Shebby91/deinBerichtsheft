@@ -1,5 +1,5 @@
 <?php
-include dirname(__DIR__).'/header.phtml';
+include dirname(__DIR__).'/Basic/header.phtml';
 ?>   
 <div class="container-fluid form-background shadow">
     <div class="row justify-content-center">
@@ -22,11 +22,11 @@ include dirname(__DIR__).'/header.phtml';
                             <label class="form-label" for="<?=$index?>"><?=$value?></label>
                             <?php if (substr($index,4,3) == "Pwd"): ?>
                                 <input type="password" class="form-control" id="<?=$index?>" name="<?=$index?>" placeholder="<?=$value?>" value="">
-                                <?php if (isset($loginErrors[$index])): ?><div id="emailHelp" class="form-text"><?=$loginErrors[$index]?></div><?php endif; ?>
+                                <?php if (isset($loginErrors[$index])): ?><div id="pwdlHelp" class="form-text"><?=$loginErrors[$index]?></div><?php endif; ?>
                             </div>
                             <?php else: ?>
-                                <input type="email" class="form-control" id="<?=$index?>" name="<?=$index?>" placeholder="<?=$value?>" value="">
-                                <?php if (isset($loginErrors[$index])): ?><div id="emailHelp" class="form-text"><?=$loginErrors[$index]?></div><?php endif; ?>
+                                <input type="text" class="form-control" id="<?=$index?>" name="<?=$index?>" placeholder="<?=$value?>" value="">
+                                <?php if (isset($loginErrors[$index])): ?><div id="nameHelp" class="form-text"><?=$loginErrors[$index]?></div><?php endif; ?>
                             </div>
                             <?php endif; ?>
                         <?php endforeach; ?>                              
@@ -36,7 +36,7 @@ include dirname(__DIR__).'/header.phtml';
                 </div>
                 <div class="card-footer card-footer-custom">
                     <div class="col-12 text-start">
-                        <a class="text-decoration-none d-flex" href="#">
+                        <a class="text-decoration-none d-flex" href="?controller=User&do=showRequestPasswordResetForm">
                             <span class="material-icons py-1 pr-1">help_outline</span>
                             <span class="p-1">Passwort vergessen?</span>
                         </a>
@@ -51,7 +51,7 @@ include dirname(__DIR__).'/header.phtml';
         </div>
     </div>
 </div>
-<?php include dirname(__DIR__).'/marketing.phtml'; ?>
-<?php include dirname(__DIR__).'/footer.phtml'; ?>
+<?php include dirname(__DIR__).'/Marketing//marketing.phtml'; ?>
+<?php include dirname(__DIR__).'/Basic/footer.phtml'; ?>
 <?php include dirname(__DIR__).'/Includes/navbarActiveState.phtml'; ?>
-<?php include dirname(__DIR__).'/footerEnd.phtml'; ?>
+<?php include dirname(__DIR__).'/Basic/footerEnd.phtml'; ?>

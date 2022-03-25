@@ -1,5 +1,5 @@
 <?php
-include dirname(__DIR__) . '/header.phtml';
+include dirname(__DIR__) . '/Basic/header.phtml';
 ?>
 <div class="modal" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
@@ -9,7 +9,7 @@ include dirname(__DIR__) . '/header.phtml';
           <div class="spinner-grow text-primary" role="status">
             <span class="visually-hidden">Loading...</span>
           </div>
-          <h4 class="text-muted">Du wirst jetzt registriert...</h4>
+          <h4 class="text-muted mt-2">Du wirst jetzt registriert...</h4>
         </div>
       </div>
     </div>
@@ -22,11 +22,11 @@ include dirname(__DIR__) . '/header.phtml';
         <h3 class="text-secondary">
           Du wurdest erfolgreich registriert.
         </h3>
-        <a href="?controller=User&do=showLoginForm">Hier geht's zum Login.</a>
+        <a class="btn btn-primary mt-3" href="?controller=User&do=showLoginForm">Hier geht's zum Login</a>
       </div>
     </div>
   </div>
 </div>
-<?php include dirname(__DIR__) . '/footer.phtml'; ?>
+<?php include dirname(__DIR__) . '/Basic/footer.phtml'; ?>
 <?php include dirname(__DIR__) . '/Includes/modalToggle.phtml'; ?>
-<?php include dirname(__DIR__) . '/footerEnd.phtml'; ?>
+<?php include dirname(__DIR__) . '/Basic/footerEnd.phtml'; ?>

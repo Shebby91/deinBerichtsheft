@@ -1,5 +1,5 @@
 <?php
-include dirname(__DIR__).'/header.phtml';
+include dirname(__DIR__).'/Basic/header.phtml';
 ?>
 <div class="container-fluid form-background shadow">    
     <div class="row justify-content-center">
@@ -38,6 +38,14 @@ include dirname(__DIR__).'/header.phtml';
                         <input type="hidden" name="do" value="validateRegistrationForm">                
                     </form>
                 </div>
+                <div class="card-footer card-footer-custom">
+                    <div class="col-12 text-start">
+                        <a class="text-decoration-none d-flex" href="?controller=User&do=showRequestPasswordResetForm">
+                            <span class="material-icons py-1 pr-1">help_outline</span>
+                            <span class="p-1">Passwort vergessen?</span>
+                        </a>
+                    </div>  
+                </div>
                 <div class="card-footer text-muted">
                     <div class="col-12 text-center">
                         <input type="submit" form="registrationForm" class="btn btn-primary" name="submit" value="Absenden">
@@ -47,7 +55,7 @@ include dirname(__DIR__).'/header.phtml';
         </div>
     </div>
 </div>
-<?php include dirname(__DIR__).'/marketing.phtml'; ?>
-<?php include dirname(__DIR__).'/footer.phtml'; ?>
+<?php include dirname(__DIR__).'/Marketing/marketing.phtml'; ?>
+<?php include dirname(__DIR__).'/Basic/footer.phtml'; ?>
 <?php include dirname(__DIR__).'/Includes/navbarActiveState.phtml'; ?>
-<?php include dirname(__DIR__).'/footerEnd.phtml'; ?>
+<?php include dirname(__DIR__).'/Basic/footerEnd.phtml'; ?>
