@@ -134,8 +134,10 @@ class UserController
     {
         if(!isset($_SESSION["pwdResetReqeuestSuccessfull"])) {
             header("location: ../index.php?controller=User&do=showLoginForm");
+        } else { //TESTZWECKE
+            header("location: ..".substr($_SESSION["secret"], 16));
         }
-
+        
         session_unset();
         session_destroy();
     }

@@ -163,7 +163,7 @@ class UserModel extends Database
             new \deinBerichtsheft\Library\ErrorMsg("Fehler beim Schreiben der Daten.", $e); 
             die;
         }
-        
+        /* EMAIL SENDEN
         $mail = new PHPMailer(true);
 
         try {
@@ -226,7 +226,8 @@ class UserModel extends Database
             new \deinBerichtsheft\Library\ErrorMsg("E-Mail konnte nicht gesendet werden. {$mail->ErrorInfo}"); 
             die;
         }
-        
+        */
+        $_SESSION["secret"] = $url; //TESTZWECKE
         $_SESSION["pwdResetReqeuestSuccessfull"] = true;
         return true;
 
@@ -340,7 +341,7 @@ class UserModel extends Database
             new \deinBerichtsheft\Library\ErrorMsg("Fehler beim Schreiben der Daten.", $e); 
             die;
         }
-        
+        /* EMAIL SENDEN
         $mail = new PHPMailer(true);
 
         try {
@@ -404,7 +405,7 @@ class UserModel extends Database
             new \deinBerichtsheft\Library\ErrorMsg("Es ist ein Fehler aufgetreten. Bitte prüfe deiner Zugangsdaten. {$mail->ErrorInfo}"); 
             die;
         }
-       
+       */
         $_SESSION["registeredSuccessfully"] = true;
 
         return true;
