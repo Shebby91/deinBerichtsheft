@@ -93,10 +93,12 @@ class UserController
             'requestPwdResetValidData' => $this->requestPwdResetValidData,
             'requestPwdResetErrors' => $this->requestPwdResetErrors
         ]);
+    
     }
 
     public function showLoginConfirmation()
     {
+    
         if(!isset($_SESSION["userUid"])) {
             header("location: ../index.php?controller=User&do=showLoginForm");
         }
@@ -132,14 +134,17 @@ class UserController
     
     public function showRequestPasswordResetConfirmation()
     {
+
         if(!isset($_SESSION["pwdResetReqeuestSuccessfull"])) {
             header("location: ../index.php?controller=User&do=showLoginForm");
-        } else { //TESTZWECKE
-            header("location: ..".substr($_SESSION["secret"], 16));
-        }
+        } 
         
         session_unset();
         session_destroy();
+
+        session_start();
+        $expires = date("U") + 900;
+        $_SESSION["mailSend"] = $expires;
     }
 
     function showLogoutConfirmation() {
@@ -183,12 +188,12 @@ class UserController
             $this->view->setDoMethodName("showRegistrationForm");
             $this->showRegistrationForm();
         } else {
-            if ($this->db->setUser($this->registrationValidData)) {
-                $this->view->setDoMethodName("showRegistrationConfirmation");
-                $this->showRegistrationConfirmation();
-            } else{
+            if (!$this->db->setUser($this->registrationValidData)) {
                 new \deinBerichtsheft\Library\ErrorMsg('Bei deiner Registrierung ist ein Fehler aufgetreten. Bitte versuche es erneut oder wende dich an den Support.'); 
                 die;
+            } else{
+                $this->view->setDoMethodName("showRegistrationConfirmation");
+                $this->showRegistrationConfirmation();
             }
         }
     }
@@ -202,12 +207,46 @@ class UserController
                 }
             } else if ($index == "userName" && !$this->db->checkUserNameExist($_POST[$index])){
                 $this->loginErrors[$index] = "Benutzername oder Passwort falsch.";
-            } else if ($index == "userPwd" && !$this->db->checkPwd(array("userPwd" => $_POST[$index], "userName" => $_POST["userName"]))) {
+                $this->loginErrors["userPwd"] = "Benutzername oder Passwort falsch.";
+                if(!isset($_SESSION["wrongPwd"])) {
+                    $_SESSION["wrongPwd"] = 1;
+                } else {
+                    $_SESSION["wrongPwd"] += 1;
+                }
+                
+            } else if ($index == "userPwd" && !$this->db->checkPwd(array("userPwd" => $_POST[$index], "userName" => $_POST["userName"]))) {     
                 $this->loginErrors["userName"] = "Benutzername oder Passwort falsch.";
                 $this->loginErrors[$index] = "Benutzername oder Passwort falsch.";
+                if(!isset($_SESSION["wrongPwd"])) {
+                    $_SESSION["wrongPwd"] = 1;
+                } else {
+                    $_SESSION["wrongPwd"] += 1;
+                }
             } else {
                 $this->loginValidData[$index] = $_POST[$index];
             }       
+        }
+
+        if (isset($_SESSION["wrongPwd"])){
+            if($_SESSION["wrongPwd"] >= 3) {
+                if(!isset($_SESSION["wrongPwdExpires"])) {
+                    $expires = date("U") + 900;
+                    $_SESSION["wrongPwdExpires"] = $expires;
+                }
+                
+                if($_SESSION["wrongPwdExpires"] == 0) {
+                    $expires = date("U") + 900;
+                    $_SESSION["wrongPwdExpires"] = $expires;
+                } else {
+                    if($_SESSION["wrongPwdExpires"] > date("U")){
+                        $this->loginErrors["userPwd"] = "Zu viele Fehlversuche. Bitt versuche es später erneut.";
+                        $this->loginErrors["userName"] = "";
+                    } else {
+                        $_SESSION["wrongPwd"] = 1;
+                        $_SESSION["wrongPwdExpires"] = 0;
+                    }
+                }
+            }
         }
 
         if (count($this->loginErrors) > 0) {
@@ -220,6 +259,34 @@ class UserController
             } else{
                 $this->view->setDoMethodName("showLoginConfirmation");
                 $this->showLoginConfirmation();
+            }
+        }
+    }
+
+    public function validateRequestPwdResetForm(){
+        foreach ($this->requestPwdResetLabels as $index => $value) {
+            if (!isset($_POST[$index]) || empty($_POST[$index])) {
+                $this->requestPwdResetErrors[$index] = $value . " angeben.";
+            } else if ($index == "userEmail" && !filter_var($_POST[$index], FILTER_VALIDATE_EMAIL)){
+                $this->requestPwdResetErrors[$index] = "E-Mail-Adresse ist ung&uuml;ltig";
+            } else if ($index == "userEmail" && !$this->db->checkEmailExist($_POST[$index])){
+                $this->requestPwdResetErrors[$index] = "E-Mail-Adresse ist ung&uuml;ltig";
+            } else if ($index == "userEmail" && $_SESSION["mailSend"] > date("U")){
+                $this->requestPwdResetErrors[$index] = "Es wurde bereits eine E-Mail versendet. Bitte prüfe dein Postfach oder versuche es später erneut.";
+            } else {
+                $this->requestPwdResetValidData[$index] = $_POST[$index];
+            }       
+        }
+
+        if (count($this->requestPwdResetErrors) > 0) {
+            $this->view->setDoMethodName("showRequestPasswordResetForm");
+            $this->showRequestPasswordResetForm();
+        } else {
+            if(!$this->db->generateResetToken($this->requestPwdResetValidData["userEmail"])) {
+                new \deinBerichtsheft\Library\ErrorMsg('Deine Anfrage ist nicht valide. Bitte wende dich an den Support oder versuche es erneut.'); 
+                die;
+            } else {
+                header("location: ../index.php?controller=user&do=showRequestPasswordResetConfirmation");
             }
         }
     }
@@ -259,33 +326,6 @@ class UserController
                 $this->showResetPasswordConfirmation();      
             }
         }  
-    }
-
-    public function validateRequestPwdResetForm(){
-        foreach ($this->requestPwdResetLabels as $index => $value) {
-            if (!isset($_POST[$index]) || empty($_POST[$index])) {
-                $this->requestPwdResetErrors[$index] = $value . " angeben.";
-            } else if ($index == "userEmail" && !filter_var($_POST[$index], FILTER_VALIDATE_EMAIL)){
-                $this->requestPwdResetErrors[$index] = "E-Mail-Adresse ist ung&uuml;ltig";
-            } else if ($index == "userEmail" && !$this->db->checkEmailExist($_POST[$index])){
-                $this->requestPwdResetErrors[$index] = "E-Mail-Adresse ist ung&uuml;ltig";
-            } else {
-                $this->requestPwdResetValidData[$index] = $_POST[$index];
-            }       
-        }
-
-        if (count($this->requestPwdResetErrors) > 0) {
-            $this->view->setDoMethodName("showRequestPasswordResetForm");
-            $this->showRequestPasswordResetForm();
-        } else {
-            if(!$this->db->generateResetToken($this->requestPwdResetValidData["userEmail"])) {
-                new \deinBerichtsheft\Library\ErrorMsg('Deine Anfrage ist nicht valide. Bitte wende dich an den Support oder versuche es erneut.'); 
-                die;
-            } else{
-                $this->view->setDoMethodName("showRequestPasswordResetConfirmation");
-                $this->showRequestPasswordResetConfirmation();
-            }
-        }
     }
 }
 ?>
