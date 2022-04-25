@@ -13,17 +13,12 @@
 <body class="d-flex flex-column h-100">
     <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-primary shadow">
         <div class="container px-4">
-            <a class="navbar-brand" href="?controller=Welcome&do=showWelcome">deinBerichtsheft.de</a>
-            <?php if(isset($_SESSION["userUid"])) { ?>
+            <a class="navbar-brand" href="?controller=Report&do=showReportOverview">deinBerichtsheft.de</a>
+            <?php if(isset($_SESSION["userId"])) { ?>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="true" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse justify-content-between" id="navbarNavAltMarkup">
-                    <div class="navbar-nav">
-                        <a class="nav-link" href="?controller=Welcome&do=showWelcome">Willkommen</a>
-                        <a class="nav-link" href="?controller=Welcome&do=showProjects">Projekte</a>
-                        <a class="nav-link" href="?controller=Welcome&do=showTutorials">Tutorials</a>
-                    </div>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
                         <a class="nav-link" href="?controller=User&do=showLogoutConfirmation"><?php echo $_SESSION["userName"] ?> ausloggen</a>
                     </div>

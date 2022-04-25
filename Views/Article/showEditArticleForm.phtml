@@ -1,0 +1,44 @@
+<?php
+include dirname(__DIR__) . '/Basic/header.phtml';
+?>
+<div class="container">
+    <div class="row pt-5 px-2">
+        <div class="col-12 d-flex justify-content-between">
+            <h2>
+                Eintrag bearbeiten
+            </h2> 
+            <a href="?controller=Article&do=showDeleteArticleConfirmation&reportId=<?= urlencode($reportId) ?>&reportName=<?= urlencode($reportName) ?>&articleId=<?= urlencode($article[0]['articleId']) ?>"><span class="material-icons text-danger py-1">delete_outline</span></a>
+        </div>
+        <div class="col-12"><hr></div>
+        <div class="col-12 mb-5">
+            <div class="card card-start card-article text-start shadow">
+                <div class="card-body">
+                    <form id="articleEditForm" method="post">
+                        <?php foreach ($articleLabels as $index => $value) : ?>
+                            <div class="mb-3">
+                                <label class="form-label" for="<?= $index ?>"><?= $value ?></label>
+                        <?php if (substr($index, 7, 9) == "Date") : ?>
+                                <input type="date" class="form-control" id="<?= $index ?>" name="<?= $index ?>" value="<?= $article[0]['articleDate'] ?>">
+                                <?php if (isset($articleErrors[$index])) : ?><div id="nameHelp" class="form-text"><?= $articleErrors[$index] ?></div><?php endif; ?>
+                            </div>
+                        <?php else : ?>
+                            <textarea class="form-control mb-3" id="<?= $index ?>" name="<?= $index ?>" placeholder="<?= $value ?>" rows="12"><?= $article[0]['articleText'] ?></textarea>
+                            <?php if (isset($articleErrors[$index])) : ?><div id="descriptionHelp" class="form-text"><?= $articleErrors[$index] ?></div><?php endif; ?>
+                            </div>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+                        <input type="hidden" name="controller" value="article">
+                        <input type="hidden" name="do" value="validateUpdateArticleForm">
+                    </form>
+                </div>
+                <div class="card-footer d-flex justify-content-between text-muted">
+                    <a href="?controller=Report&do=showReportDetail&reportId=<?= urlencode($reportId)?>&reportName=<?= urlencode($reportName)?>" class="btn btn-sm btn-outline-primary">Zurück zur Übersicht</a>
+                    <input type="submit" form="articleEditForm" class="btn btn-sm btn-primary" name="submit" value="Bericht speichern">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<?php include dirname(__DIR__) . '/Basic/footer.phtml'; ?>
+<?php include dirname(__DIR__) . '/Includes/navbarActiveState.phtml'; ?>
+<?php include dirname(__DIR__) . '/Basic/footerEnd.phtml'; ?>

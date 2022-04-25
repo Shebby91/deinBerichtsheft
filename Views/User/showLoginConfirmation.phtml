@@ -19,10 +19,10 @@ include dirname(__DIR__) . '/Basic/header.phtml';
   <div class="outer">
     <div class="middle">
       <div class="col-12 text-center mx-auto">
-        <h3 class="text-secondary">
+        <h3 class="text-secondary px-2">
           Herzlich Willkommen <?php echo $_SESSION["userName"]; ?>
         </h3>
-        <a class="btn btn-primary mt-3" href="?controller=Welcome&do=showWelcome">Hier geht's weiter</a>
+        <a class="btn btn-primary mt-3" href="?controller=Report&do=showReportOverview">Hier geht's zu deiner Übersicht</a>
       </div>
     </div>
   </div>

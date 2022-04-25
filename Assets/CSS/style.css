@@ -2,6 +2,10 @@ body{
     background-color: #f2f2f2;
 }
 
+textarea {
+    resize: none;
+}
+
 .form-background {
     background-image: url(../images/start/img_welcome.png);
     background-repeat: no-repeat;
@@ -13,8 +17,18 @@ body{
     color:#dc3545;
 }
 
+#card-deck{
+    overflow-y: scroll;
+    height: calc(100vh - 287px);
+}
+
 .card-start {
     opacity: 96%;
+}
+
+.card-action {
+    min-height: 148px;
+    max-height: 148px;
 }
 
 .card-login, .card-pwd {
@@ -23,6 +37,14 @@ body{
 
 .card-registration {
     min-height: 631px;
+}
+
+.card-article {
+    min-height: 560px;
+}
+
+.card-report {
+    min-height: 364px;
 }
 
 .card-footer-custom {
@@ -54,4 +76,8 @@ body{
 
 .shadow-footer {
     box-shadow: 0 -0.5rem 1rem rgba(0,0,0,.15)!important;
+}
+
+#addIcon{
+    font-size: 4.25rem;
 }

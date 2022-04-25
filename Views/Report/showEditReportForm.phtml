@@ -1,0 +1,44 @@
+<?php
+include dirname(__DIR__) . '/Basic/header.phtml';
+?>
+<div class="container">
+    <div class="row pt-5 px-2 justify-content-center">
+        <div class="col-12 d-flex justify-content-between">
+            <h2>
+                Berichtsheft bearbeiten
+            </h2> 
+            <a href="?controller=Report&do=showDeleteReportConfirmation&reportId=<?= $report[0]['reportId'] ?>"><span class="material-icons text-danger py-1">delete_outline</span></a>
+        </div>
+        <div class="col-12"><hr></div>
+        <div class="col-12">
+            <div class="card card-start card-report text-start mb-5 shadow">
+                <div class="card-body">
+                    <form id="reportEditForm" method="post">
+                        <?php foreach ($reportLabels as $index => $value) : ?>
+                            <div class="mb-3">
+                                <label class="form-label" for="<?= $index ?>"><?= $value ?></label>
+                                <?php if (substr($index, 6, 9) == "Name") : ?>
+                                <input type="text" class="form-control" id="<?= $index ?>" name="<?= $index ?>" placeholder="<?= $value ?>" value="<?= $report[0]['reportName'] ?>">
+                                <?php if (isset($reportErrors[$index])) : ?><div id="nameHelp" class="form-text"><?= $reportErrors[$index] ?></div><?php endif; ?>
+                            </div>
+                        <?php else : ?>
+                            <textarea class="form-control mb-3" id="<?= $index ?>" name="<?= $index ?>" placeholder="<?= $value ?>" rows="3"><?= $report[0]['reportDescription'] ?></textarea>
+                            <?php if (isset($reportErrors[$index])) : ?><div id="descriptionHelp" class="form-text"><?= $reportErrors[$index] ?></div><?php endif; ?>
+                            </div>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+                        <input type="hidden" name="controller" value="report">
+                        <input type="hidden" name="do" value="validateEditReportForm">
+                    </form>
+                </div>
+            <div class="card-footer d-flex justify-content-between text-muted">
+                <a href="?controller=Report&do=showReportDetail&reportId=<?= urlencode($reportId) ?>&reportName=<?= urlencode($reportName) ?>" class="btn btn-sm btn-outline-primary">Zurück zur Übersicht</a>
+                <input type="submit" form="reportEditForm" class="btn btn-sm btn-primary" name="submit" value="Berichtsheft speichern">
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<?php include dirname(__DIR__) . '/Basic/footer.phtml'; ?>
+<?php include dirname(__DIR__) . '/Includes/navbarActiveState.phtml'; ?>
+<?php include dirname(__DIR__) . '/Basic/footerEnd.phtml'; ?>

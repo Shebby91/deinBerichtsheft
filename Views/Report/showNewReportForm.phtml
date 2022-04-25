@@ -1,0 +1,43 @@
+<?php
+include dirname(__DIR__) . '/Basic/header.phtml';
+?>
+<div class="container">
+    <div class="row pt-5 px-2 justify-content-center">
+        <div class="col-12">
+            <h2>
+                Neues Berichtsheft
+            </h2> 
+            <hr>
+        </div>
+        <div class="col-12">
+            <div class="card card-start card-report text-start mb-5 shadow">
+                <div class="card-body">
+                    <form id="reportForm" method="post">
+                        <?php foreach ($reportLabels as $index => $value) : ?>
+                            <div class="mb-3">
+                                <label class="form-label" for="<?= $index ?>"><?= $value ?></label>
+                                <?php if (substr($index, 6, 9) == "Name") : ?>
+                                <input type="text" class="form-control" id="<?= $index ?>" name="<?= $index ?>" placeholder="<?= $value ?>" value="">
+                                <?php if (isset($reportErrors[$index])) : ?><div id="nameHelp" class="form-text"><?= $reportErrors[$index] ?></div><?php endif; ?>
+                            </div>
+                        <?php else : ?>
+                            <textarea class="form-control mb-3" id="<?= $index ?>" name="<?= $index ?>" placeholder="<?= $value ?>" value="" rows="3"></textarea>
+                            <?php if (isset($reportErrors[$index])) : ?><div id="descriptionHelp" class="form-text"><?= $reportErrors[$index] ?></div><?php endif; ?>
+                            </div>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+                        <input type="hidden" name="controller" value="report">
+                        <input type="hidden" name="do" value="validateNewReportForm">
+                    </form>
+                </div>
+            <div class="card-footer d-flex justify-content-between text-muted">
+                <a href="?controller=Report&do=showReportOverview" class="btn btn-sm btn-outline-primary">Zurück zur Übersicht</a>
+                <input type="submit" form="reportForm" class="btn btn-sm btn-primary" name="submit" value="Berichtsheft erstellen">
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<?php include dirname(__DIR__) . '/Basic/footer.phtml'; ?>
+<?php include dirname(__DIR__) . '/Includes/navbarActiveState.phtml'; ?>
+<?php include dirname(__DIR__) . '/Basic/footerEnd.phtml'; ?>

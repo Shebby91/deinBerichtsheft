@@ -34,8 +34,8 @@ class UserController
 
     public function showRegistrationForm()
     {   
-        if(isset($_SESSION["userUid"])) {
-            header("location: ../index.php?controller=welcome&do=showWelcome");
+        if(isset($_SESSION["userId"])) {
+            header("location: ../index.php?controller=report&do=showReportOverview");
         }
 
         $this->view->setVars([
@@ -47,8 +47,8 @@ class UserController
 
     public function showLoginForm()
     {   
-        if(isset($_SESSION["userUid"])) {
-            header("location: ../index.php?controller=welcome&do=showWelcome");
+        if(isset($_SESSION["userId"])) {
+            header("location: ../index.php?controller=report&do=showReportOverview");
         }
 
         $this->view->setVars([
@@ -79,13 +79,12 @@ class UserController
                 'resetPwdSecurityData' => $this->resetPwdSecurityData
             ]);
         }
-
     }
 
     public function showRequestPasswordResetForm()
     {
-        if(isset($_SESSION["userUid"])) {
-            header("location: ../index.php?controller=welcome&do=showWelcome");
+        if(isset($_SESSION["userId"])) {
+            header("location: ../index.php?controller=report&do=showReportOverview");
         }
 
         $this->view->setVars([
@@ -93,21 +92,22 @@ class UserController
             'requestPwdResetValidData' => $this->requestPwdResetValidData,
             'requestPwdResetErrors' => $this->requestPwdResetErrors
         ]);
-    
     }
 
     public function showLoginConfirmation()
     {
     
-        if(!isset($_SESSION["userUid"])) {
+        if(!isset($_SESSION["userId"])) {
             header("location: ../index.php?controller=User&do=showLoginForm");
         }
 
         if(isset($_SESSION["loginConfirmationShown"])) {
-            header("location: ../index.php?controller=welcome&do=showWelcome");
+            header("location: ../index.php?controller=report&do=showReportOverview");
         }
 
         $_SESSION["loginConfirmationShown"] = true;
+        
+
     }
 
 
@@ -149,7 +149,7 @@ class UserController
 
     function showLogoutConfirmation() {
         
-        if(!isset($_SESSION["userUid"])) {
+        if(!isset($_SESSION["userId"])) {
             header("location: ../index.php?controller=User&do=showLoginForm");
         }
 

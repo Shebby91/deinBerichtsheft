@@ -114,7 +114,7 @@ class UserModel extends Database
             return false;
         } else {
             $_SESSION["userName"] = $user[0]["userName"];
-            $_SESSION["userUid"] = $user[0]["userUid"];
+            $_SESSION["userId"] = $user[0]["userId"];
             $_SESSION["userEmail"] = $user[0]["userEmail"];
             return true;
         }
@@ -164,6 +164,7 @@ class UserModel extends Database
             die;
         }
         // EMAIL SENDEN IF $_SESSION["emailSend] = true
+        /*
         $mail = new PHPMailer(true);
 
         try {
@@ -226,7 +227,7 @@ class UserModel extends Database
             new \deinBerichtsheft\Library\ErrorMsg("E-Mail konnte nicht gesendet werden. {$mail->ErrorInfo}"); 
             die;
         }
-    
+    */
         $_SESSION["pwdResetReqeuestSuccessfull"] = true;
         return true;
 
@@ -341,6 +342,7 @@ class UserModel extends Database
             die;
         }
 
+        /*
         $mail = new PHPMailer(true);
 
         try {
@@ -404,7 +406,7 @@ class UserModel extends Database
             new \deinBerichtsheft\Library\ErrorMsg("Es ist ein Fehler aufgetreten. Bitte prüfe deiner Zugangsdaten. {$mail->ErrorInfo}"); 
             die;
         }
-
+*/
         $_SESSION["registeredSuccessfully"] = true;
 
         return true;

@@ -1,0 +1,55 @@
+<?php
+include dirname(__DIR__) . '/Basic/header.phtml';
+?>
+<div class="container">
+    <div class="row pt-5 px-2">
+        <div class="col-12">
+            <h2>
+                Übersicht Berichtshefte
+            </h2>
+        </div>
+        <div class="col-12"><hr></div>
+        <div id="card-deck" class="col-12 mb-5">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4  g-4">
+                <div class="col">
+                    <a href="?controller=Report&do=showNewReportForm" class="card card-action text-dark bg-light text-decoration-none shadow">
+                        <div class="card-body row h-100 align-items-center">
+                            <div class="col-12">
+                                <h5 class="card-title text-center"><strong>Neues Berichtsheft</strong></h5>
+                                <div class="col-12 text-center"><span id="addIcon" class="material-icons py-1 pr-1">add_circle_outline</span></div>  
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <?php if (!empty($reportOverviewData)) : ?>
+                    <?php foreach ($reportOverviewData as $index => $value) : ?>
+                    <div class="col">
+                        <a href="?controller=Report&do=showReportDetail&reportId=<?= urlencode($reportOverviewData[$index]["reportId"])?>&reportName=<?= urlencode($reportOverviewData[$index]["reportName"])?>" class="card card-action text-white bg-secondary text-decoration-none shadow">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <?php if (strlen($reportOverviewData[$index]["reportName"]) > 20)  : ?> 
+                                    <?= substr($reportOverviewData[$index]["reportName"],0,20)."..." ?>
+                                    <?php else : ?> 
+                                        <?= $reportOverviewData[$index]["reportName"] ?>
+                                    <?php endif; ?>
+                                </h5>
+                                <p class="card-text">
+                                    <?php if (strlen($reportOverviewData[$index]["reportDescription"]) > 46)  : ?> 
+                                    <?= substr($reportOverviewData[$index]["reportDescription"],0,46)."..." ?>
+                                    <?php else : ?> 
+                                        <?= $reportOverviewData[$index]["reportDescription"] ?>
+                                    <?php endif; ?>
+                                </p>
+                                <small class="text-white">Erstellt am: <?= date('d.m.Y h:m:s',strtotime($reportOverviewData[$index]["reportCreatedAt"])) ?></small>
+                            </div>
+                        </a>
+                    </div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+</div>
+<?php include dirname(__DIR__) . '/Basic/footer.phtml'; ?>
+<?php include dirname(__DIR__) . '/Includes/navbarActiveState.phtml'; ?>
+<?php include dirname(__DIR__) . '/Basic/footerEnd.phtml'; ?>

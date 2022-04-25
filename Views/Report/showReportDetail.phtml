@@ -1,0 +1,64 @@
+<?php
+include dirname(__DIR__) . '/Basic/header.phtml';
+?>
+<div class="container">
+    <div class="row pt-5 px-2">
+        <div class="col-12 d-flex justify-content-between">
+            <h2>
+                <?= $reportName ?>
+            </h2>
+            <a href="?controller=Report&do=showEditReportForm&reportId=<?= urlencode($reportId) ?>&reportName=<?= urlencode($reportName) ?>"><span class="material-icons text-dark py-1">settings</span></a>
+        </div>
+        <div class="col-12"><hr></div>
+        <div id="card-deck" class="col-12 mb-5">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xxl-4  g-4">
+                <div class="col action">
+                    <a href="?controller=Report&do=showReportOverview" class="card card-action text-dark bg-light text-decoration-none shadow">
+                        <div class="card-body row h-100 align-items-center">
+                            <div class="col-12">
+                                <h5 class="card-title text-center"><strong>Zurück zur Übersicht</strong></h5>
+                                <div class="col-12 text-center"><span id="addIcon" class="material-icons py-1">article</span></div>  
+                            </div>
+                        </div>
+                    </a>
+                </div>    
+                <div class="col action">
+                    <a href="?controller=Article&do=showNewArticleForm&reportId=<?= urlencode($reportId) ?>&reportName=<?= urlencode($reportName) ?>" class="card card-action text-dark bg-light text-decoration-none shadow">
+                        <div class="card-body row h-100 align-items-center">
+                            <div class="col-12">
+                                <h5 class="card-title text-center"><strong>Neuer Tagesbericht</strong></h5>
+                                <div class="col-12 text-center"><span id="addIcon" class="material-icons py-1">add_circle_outline</span></div>  
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col action">
+                    <div  class="card card-action text-dark bg-light text-decoration-none shadow">
+                        <div class="card-body row h-100 align-items-start">
+                            <div class="col-12">
+                            <h5 class="card-title text-center"><strong>Suche nach Datum</strong></h5>
+                            <input type="date" class="form-control mt-3" id="myInput" onchange="myFunction()">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?php if (!empty($reportDetailData)) : ?>
+                    <?php foreach ($reportDetailData as $index => $value) : ?>
+                    <div class="col">
+                        <a href="?controller=Article&do=showEditArticleForm&reportId=<?= urlencode($reportId) ?>&reportName=<?= urlencode($reportName) ?>&articleId=<?= urlencode($reportDetailData[$index]["articleId"]) ?>" class="card card-action text-white bg-primary text-decoration-none shadow">
+                            <div class="card-body">
+                                <h5 class="card-title">Tagesbericht <?= date('d.m.Y',strtotime($reportDetailData[$index]["articleDate"])) ?></h5>
+                                <p class="card-text"><?= substr($reportDetailData[$index]["articleText"], 0, 60)."..." ?></p>
+                            </div>
+                        </a>
+                    </div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>    
+</div>
+<?php include dirname(__DIR__) . '/Basic/footer.phtml'; ?>
+<?php include dirname(__DIR__) . '/Includes/navbarActiveState.phtml'; ?>
+<?php include dirname(__DIR__) . '/Includes/searchByDate.phtml'; ?>
+<?php include dirname(__DIR__) . '/Basic/footerEnd.phtml'; ?>
