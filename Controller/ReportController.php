@@ -2,7 +2,6 @@
 	
 namespace deinBerichtsheft\Controller;
 
-use DateTime;
 use deinBerichtsheft\Model\ReportModel;
 use deinBerichtsheft\Model\ArticleModel;
 
