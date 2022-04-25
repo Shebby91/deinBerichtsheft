@@ -48,7 +48,6 @@ class ReportController
     public function showNewReportConfirmation()
     {
 
-
     }
 
     public function showEditReportConfirmation()
@@ -68,7 +67,7 @@ class ReportController
         $reportId = $_GET['reportId'];
         $this->db->deleteUserReports($reportId);
     }
-
+    //ADD AMOUNT OF ENTRIES
     function showReportOverview() {
         if(!isset($_SESSION["userId"])) {
             header("location: ../index.php?controller=User&do=showLoginForm");
