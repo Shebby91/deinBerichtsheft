@@ -58,6 +58,7 @@ class ArticleController
         $reportId = $_GET["reportId"];
         $reportName = $_GET["reportName"];
         $articleId = $_GET['articleId'];
+        //TODO: DELETE WHERE REPORT ID, REPORT NAME, ARTICLE ID AND USER ID
         $this->db->deleteArticleById($articleId);
 
         $this->view->setVars([

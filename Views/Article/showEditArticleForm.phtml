@@ -7,7 +7,14 @@ include dirname(__DIR__) . '/Basic/header.phtml';
             <h2>
                 Eintrag bearbeiten
             </h2> 
-            <a href="?controller=Article&do=showDeleteArticleConfirmation&reportId=<?= urlencode($reportId) ?>&reportName=<?= urlencode($reportName) ?>&articleId=<?= urlencode($article[0]['articleId']) ?>"><span class="material-icons text-danger py-1">delete_outline</span></a>
+            <form id="articleDeleteForm" method="post">
+                <input type="hidden" name="controller" value="article">
+                <input type="hidden" name="do" value="showDeleteArticleConfirmation">
+                <input type="hidden" name="reportId" value="<?= urlencode($reportId) ?>">
+                <input type="hidden" name="reportName" value="<?= $reportName ?>">
+                <input type="hidden" name="articleId" value="<?= urlencode($article[0]['articleId']) ?>">
+                <button id="delete" type="submit" class="btn material-icons text-danger py-1">delete_outline</buttton>                
+            </form>
         </div>
         <div class="col-12"><hr></div>
         <div class="col-12 mb-5">
@@ -41,4 +48,5 @@ include dirname(__DIR__) . '/Basic/header.phtml';
 </div>
 <?php include dirname(__DIR__) . '/Basic/footer.phtml'; ?>
 <?php include dirname(__DIR__) . '/Includes/navbarActiveState.phtml'; ?>
+<?php include dirname(__DIR__) . '/Includes/deleteConfirmation.phtml'; ?>
 <?php include dirname(__DIR__) . '/Basic/footerEnd.phtml'; ?>

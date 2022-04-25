@@ -110,8 +110,6 @@ class UserController
 
     }
 
-
-
     public function showRegistrationConfirmation()
     {       
         if(!isset($_SESSION["registeredSuccessfully"])) {

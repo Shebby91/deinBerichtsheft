@@ -65,9 +65,9 @@ class ReportController
 
     public function showDeleteReportConfirmation()
     {
+        //TODO: DELETE WHERE REPORT ID AND USER ID
         $reportId = $_GET['reportId'];
         $this->db->deleteUserReports($reportId);
-
     }
 
     function showReportOverview() {
