@@ -18,6 +18,10 @@ textarea {
     font-size: 1.75rem;
 }
 
+.card-action-hover:hover{
+    color: #0d6efd;
+}
+
 .form-background {
     background-image: url(../images/start/img_welcome.png);
     background-repeat: no-repeat;

@@ -15,7 +15,7 @@ include dirname(__DIR__) . '/Basic/header.phtml';
                 <div class="col action">
                     <a href="?controller=Report&do=showReportOverview" class="card card-action text-dark bg-light text-decoration-none shadow">
                         <div class="card-body row h-100 align-items-center">
-                            <div class="col-12">
+                            <div class="col-12 card-action-hover">
                                 <h5 class="card-title text-center"><strong>Zurück zur Übersicht</strong></h5>
                                 <div class="col-12 text-center"><span id="addIcon" class="material-icons py-1">article</span></div>  
                             </div>
@@ -25,7 +25,7 @@ include dirname(__DIR__) . '/Basic/header.phtml';
                 <div class="col action">
                     <a href="?controller=Article&do=showNewArticleForm&reportId=<?= urlencode($reportId) ?>&reportName=<?= urlencode($reportName) ?>" class="card card-action text-dark bg-light text-decoration-none shadow">
                         <div class="card-body row h-100 align-items-center">
-                            <div class="col-12">
+                            <div class="col-12 card-action-hover">
                                 <h5 class="card-title text-center"><strong>Neuer Tagesbericht</strong></h5>
                                 <div class="col-12 text-center"><span id="addIcon" class="material-icons py-1">add_circle_outline</span></div>  
                             </div>
@@ -35,7 +35,7 @@ include dirname(__DIR__) . '/Basic/header.phtml';
                 <div class="col action">
                     <div  class="card card-action text-dark bg-light text-decoration-none shadow">
                         <div class="card-body row h-100 align-items-center">
-                            <div class="col-12">
+                            <div class="col-12 card-action-hover">
                             <h5 class="card-title text-center"><strong>Suche nach Datum</strong></h5>
                             <input type="date" class="form-control mt-5" id="date">
                             </div>
