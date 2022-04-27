@@ -40,6 +40,14 @@ include dirname(__DIR__) . '/Basic/header.phtml';
                                         <?= $reportOverviewData[$index]["reportDescription"] ?>
                                     <?php endif; ?>
                                 </p>
+                                <small class="text-white">  
+                                <?= $reportEntries[$index] ?>
+                                <?php if ($reportEntries[$index] == 1)  : ?> 
+                                    Eintrag
+                                <?php else : ?> 
+                                    Einträge
+                                <?php endif; ?>
+                                </small><br>
                                 <small class="text-white">Erstellt am: <?= date('d.m.Y h:m:s',strtotime($reportOverviewData[$index]["reportCreatedAt"])) ?></small>
                             </div>
                         </a>

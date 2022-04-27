@@ -30,8 +30,8 @@ textarea {
 }
 
 .card-action {
-    min-height: 148px;
-    max-height: 148px;
+    min-height: 170px;
+    max-height: 170px;
 }
 
 .card-login, .card-pwd {

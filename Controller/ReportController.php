@@ -74,9 +74,27 @@ class ReportController
         }
         
         $userReports = $this->db->getUserReports();
+        $reportEntries = [];
+
+        $this->db = new ArticleModel();
+        for ($i=0; $i < Count($userReports); $i++) { 
+            $reportId = $userReports[$i]["reportId"];
+            
+            $reportArticles = $this->db->getReportArticles($reportId);
+            $articles = [];
+            if($reportArticles){
+                for ($j=0; $j < Count($reportArticles) ; $j++) { 
+                    array_push($articles, $reportArticles[$i]["reportId"]);  
+                }
+                array_push($reportEntries, Count($articles));
+            } else {
+                array_push($reportEntries, 0);
+            }   
+        }
 
         $this->view->setVars([
-            'reportOverviewData' => $userReports
+            'reportOverviewData' => $userReports,
+            'reportEntries' => $reportEntries
         ]);
     }
 
