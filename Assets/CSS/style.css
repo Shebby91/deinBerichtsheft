@@ -10,6 +10,10 @@ textarea {
     font-size: 4.25rem;
 }
 
+#logoutIcon{
+    font-size: 30px;
+}
+
 #delete{
     font-size: 1.75rem;
 }
