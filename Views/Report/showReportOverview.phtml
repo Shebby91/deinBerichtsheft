@@ -24,23 +24,27 @@ include dirname(__DIR__) . '/Basic/header.phtml';
                 <?php if (!empty($reportOverviewData)) : ?>
                     <?php foreach ($reportOverviewData as $index => $value) : ?>
                     <div class="col">
-                        <a href="?controller=Report&do=showReportDetail&reportId=<?= urlencode($reportOverviewData[$index]["reportId"])?>&reportName=<?= urlencode($reportOverviewData[$index]["reportName"])?>" class="card card-action text-white bg-secondary text-decoration-none shadow">
-                            <div class="card-body">
-                                <h5 class="card-title">
+                        <a href="?controller=Report&do=showReportDetail&reportId=<?= urlencode($reportOverviewData[$index]["reportId"])?>&reportName=<?= urlencode($reportOverviewData[$index]["reportName"])?>" class="card card-action text-white bg-light text-decoration-none shadow">
+                            <div class="card-header bg-primary">
+                                <h5 class="card-title text-white">
                                     <?php if (strlen($reportOverviewData[$index]["reportName"]) > 20)  : ?> 
                                     <?= substr($reportOverviewData[$index]["reportName"],0,20)."..." ?>
                                     <?php else : ?> 
                                         <?= $reportOverviewData[$index]["reportName"] ?>
                                     <?php endif; ?>
                                 </h5>
-                                <p class="card-text">
-                                    <?php if (strlen($reportOverviewData[$index]["reportDescription"]) > 46)  : ?> 
-                                    <?= substr($reportOverviewData[$index]["reportDescription"],0,46)."..." ?>
+                            </div>
+                            <div class="card-body py-2">
+                                <strong>
+                                <p class="card-text text-dark mb-0">
+                                    <?php if (strlen($reportOverviewData[$index]["reportDescription"]) > 43)  : ?> 
+                                    <?= substr($reportOverviewData[$index]["reportDescription"],0,43)."..." ?>
                                     <?php else : ?> 
                                         <?= $reportOverviewData[$index]["reportDescription"] ?>
                                     <?php endif; ?>
                                 </p>
-                                <small class="text-white">  
+                                </strong>
+                                <small class="text-dark">  
                                 <?= $reportEntries[$index] ?>
                                 <?php if ($reportEntries[$index] == 1)  : ?> 
                                     Eintrag
@@ -48,7 +52,7 @@ include dirname(__DIR__) . '/Basic/header.phtml';
                                     Einträge
                                 <?php endif; ?>
                                 </small><br>
-                                <small class="text-white">Erstellt am: <?= date('d.m.Y h:m:s',strtotime($reportOverviewData[$index]["reportCreatedAt"])) ?></small>
+                                <small class="text-dark">Erstellt am: <?= date('d.m.Y h:m:s',strtotime($reportOverviewData[$index]["reportCreatedAt"])) ?></small>
                             </div>
                         </a>
                     </div>
