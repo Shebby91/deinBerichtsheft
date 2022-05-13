@@ -116,6 +116,7 @@ class UserModel extends Database
             $_SESSION["userName"] = $user[0]["userName"];
             $_SESSION["userId"] = $user[0]["userId"];
             $_SESSION["userEmail"] = $user[0]["userEmail"];
+            $_SESSION["tableView"] = false;
             return true;
         }
 

@@ -50,6 +50,29 @@ class ReportController
 
     }
 
+    public function getView()
+    {
+        if($_SESSION["tableView"] == true) {
+            echo "true";
+        } else if ($_SESSION["tableView"] == false) {
+            echo "false";
+        }
+        die;
+    }
+
+    public function setView()
+    {
+        $lastState = $_REQUEST["q"];
+        if($lastState == "table") {
+            $_SESSION["tableView"] = true;
+            echo "true";
+        } else if($lastState == "card") {
+            $_SESSION["tableView"] = false;
+            echo "false";
+        }
+        die;
+    }
+
     public function showEditReportConfirmation()
     {
         $reportId = $_GET["reportId"];
@@ -167,8 +190,8 @@ class ReportController
         }
 
         if (count($this->reportErrors) > 0) {
-            $this->view->setDoMethodName("showNewReportForm");
-            $this->showNewReportForm();
+            $this->view->setDoMethodName("showEditReportForm");
+            $this->showEditReportForm();
         } else {     
             array_push($this->reportValidData, $reportId);    
             if(!$this->db->updateReport($this->reportValidData)) {

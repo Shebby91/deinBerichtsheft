@@ -6,6 +6,15 @@ textarea {
     resize: none;
 }
 
+h5{
+    font-size: 1.15rem;
+}
+
+h2{
+    font-size: 1.75rem;
+    margin-bottom: 0;
+}
+
 #addIcon{
     font-size: 4.25rem;
 }
@@ -31,6 +40,10 @@ textarea {
 
 .form-text{
     color:#dc3545;
+}
+
+.card-title{
+    margin-bottom: 0;
 }
 
 .card-start {
@@ -63,6 +76,10 @@ textarea {
     border-top: 0;
 }
 
+.bg-transparent {
+    background-color: transparent;
+}
+
 .modal-body{
     min-height: 240px!important;
 }
@@ -75,7 +92,7 @@ textarea {
     height: 100%;
     width: 100%;
 }
-  
+
 .middle {
     display: table-cell;
     vertical-align: middle;
@@ -88,3 +105,34 @@ textarea {
 .shadow-footer {
     box-shadow: 0 -0.5rem 1rem rgba(0,0,0,.15)!important;
 }
+
+table thead {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1
+}
+
+.table>:not(:first-child) {
+    border-top: 0!important;
+}
+
+#table-container{
+    min-height: 120px!important;
+    overflow-y: scroll;
+}
+
+/*Small devices (small phones, 320px and up)*/
+@media (min-width: 320px) { 
+    .col-placeholder {
+        display: none;
+    }
+}
+
+/*X-Large devices (large desktops, 1200px and up)*/
+@media (min-width: 1200px) { 
+    .col-placeholder {
+        display: block;
+    }
+}
+
