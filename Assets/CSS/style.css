@@ -201,6 +201,12 @@ background-color: transparent;
     color: #fff;
 }
 
+.dropdown-menu[data-bs-popper] {
+    top: 100%;
+    left: -130px!important;
+    margin-top: -0.525rem!important;
+}
+
 #delete-icon{
     transition: transform 0.125s;
     font-size: 28px;
@@ -242,7 +248,7 @@ background-color: transparent;
 
 @media (min-width: 320px) { 
     body{
-        font-size: 13px;
+        font-size: 14px;
     }
     .dropdown-menu[data-bs-popper] {
         top: 100%;
