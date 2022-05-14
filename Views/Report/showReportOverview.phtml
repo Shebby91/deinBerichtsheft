@@ -12,7 +12,7 @@ include dirname(__DIR__) . '/Basic/header.phtml';
         <div class="col-12 mb-5">
             <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4  g-4">
                 <div class="col">
-                    <a href="?controller=Report&do=showNewReportForm" class="card card-action text-dark bg-light text-decoration-none shadow">
+                    <a href="?controller=Report&do=showNewReportForm" class="card card-action grow-cards text-dark bg-light text-decoration-none shadow">
                         <div class="card-body row h-100 align-items-center">
                             <div class="col-12 card-action-hover">
                                 <h5 class="card-title text-center"><strong>Neues Berichtsheft</strong></h5>
@@ -24,7 +24,7 @@ include dirname(__DIR__) . '/Basic/header.phtml';
                 <?php if (!empty($reportOverviewData)) : ?>
                     <?php foreach ($reportOverviewData as $index => $value) : ?>
                     <div class="col">
-                        <a href="?controller=Report&do=showReportDetail&reportId=<?= urlencode($reportOverviewData[$index]["reportId"])?>&reportName=<?= urlencode($reportOverviewData[$index]["reportName"])?>" class="card card-action text-white bg-light text-decoration-none shadow">
+                        <a href="?controller=Report&do=showReportDetail&reportId=<?= urlencode($reportOverviewData[$index]["reportId"])?>&reportName=<?= urlencode($reportOverviewData[$index]["reportName"])?>" class="card card-action grow-content-cards text-white bg-light text-decoration-none shadow">
                             <div class="card-header bg-primary">
                                 <h5 class="card-title text-white">
                                     <?php if (strlen($reportOverviewData[$index]["reportName"]) > 20)  : ?> 

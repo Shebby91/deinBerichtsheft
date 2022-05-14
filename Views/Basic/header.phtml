@@ -11,29 +11,49 @@
 </head>
 
 <body class="d-flex flex-column h-100">
-    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-primary shadow">
+    <nav class="navbar sticky-top navbar-expand-sm navbar-dark bg-primary shadow">
         <div class="container px-4">
             <a class="navbar-brand" href="?controller=Report&do=showReportOverview">deinBerichtsheft.de</a>
-            <?php if(isset($_SESSION["userId"])) { ?>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="true" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
-                    <div class="navbar-nav">
+                <?php if(isset($_SESSION["userId"])) { ?>
+                    <div class="justify-content-end" id="navbarNavAltMarkup">
+                        <div class="btn-group">
+                          <button type="button" class="btn border-0 p-0" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                            <a class="nav-link p-0" href="#">
+                                <span id="profileIcon" class="material-icons">account_circle</span>
+                            </a>
+                          </button>
+                          <ul class="dropdown-menu dropdown-menu-sm-end">
+                            <li>
+                                <button class="dropdown-item d-flex align-items-center px-1" type="button">
+                                    <span class="material-icons px-1">
+                                        manage_accounts
+                                    </span>
+                                    Profil bearbeiten
+                                </button>
+                            </li>
+                            <li>
+                                <button class="dropdown-item d-flex align-items-center px-1" type="button">
+                                    <span class="material-icons px-1 f-22-icons">
+                                        settings
+                                    </span>
+                                        Einstellungen
+                                </button>
+                            </li>
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center px-1" href="?controller=User&do=showLogoutConfirmation">
+                                    <span class="material-icons px-1 f-22-icons">
+                                        logout
+                                    </span>
+                                    Ausloggen
+                                </a>
+                            </li>
+                          </ul>
+                        </div>
+                    </div>
+                    <!--<div class="navbar-nav">
                         <a class="nav-link p-0" href="?controller=User&do=showLogoutConfirmation"><span id="logoutIcon" class="material-icons mt-1">logout</span></a>
-                    </div>
-                </div>
-            <?php } else { ?> 
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="true" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
-                    <div class="navbar-nav">
-                    <a class="nav-link" href="?controller=User&do=showRegistrationForm">Registrierung</a>
-                        <a class="nav-link" href="?controller=User&do=showLoginForm">Einloggen</a>
-                    </div>
-                </div>
-            <?php } ?>
+                    </div>-->
+                    <?php } ?>
         </div>
     </nav>
 

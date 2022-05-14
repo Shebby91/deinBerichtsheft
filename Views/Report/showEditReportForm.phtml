@@ -3,7 +3,7 @@ include dirname(__DIR__) . '/Basic/header.phtml';
 ?>
 <div class="container">
     <div class="row pt-5 px-2 justify-content-center">
-        <div class="col-12 d-flex justify-content-between">
+        <div class="col-12 d-flex justify-content-between align-items-center">
             <h2>
                 Berichtsheft bearbeiten
             </h2> 
@@ -11,7 +11,7 @@ include dirname(__DIR__) . '/Basic/header.phtml';
                 <input type="hidden" name="controller" value="report">
                 <input type="hidden" name="do" value="showDeleteReportConfirmation">
                 <input type="hidden" name="reportId" value="<?= urlencode($report[0]['reportId']) ?>">
-                <button id="delete" type="submit" class="btn material-icons text-danger px-0 py-1">delete_outline</buttton>                
+                <button id="delete" type="submit" class="btn text-danger px-0 py-1"><span class="material-icons md1" id="delete-icon"></span></buttton>                
             </form>
         </div>
         <div class="col-12"><hr></div>

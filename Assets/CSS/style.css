@@ -22,9 +22,54 @@ table thead {
     z-index: 1
 }
 
+.w-98{
+    width: 98%!important;
+}
+
+.date-check{
+    transition: all .1s ease-in-out;
+    background-color: transparent;
+}
+.date-check:hover { 
+    overflow: hidden;
+    transform: scale(1.0125);
+ }
+
+ .date-check.tr:hover {
+background-color: transparent;
+}
+.date-check.th:hover {
+    background-color: transparent;
+    }
+
+.grow-icons { transition: all .05s ease-in-out; }
+.grow-icons:hover { 
+    transform: scale(1.175);
+    color: #0d6efd!important;
+ }
+
+.grow-cards { transition: all .05s ease-in-out; }
+.grow-cards:hover { 
+    transform: scale(1.0275);
+    color: #0d6efd!important;
+ }
+
+.grow-content-cards { transition: all .05s ease-in-out; }
+.grow-content-cards:hover { 
+    transform: scale(1.0275);
+ }
+
 .bg-transparent:focus+.btn, .btn:focus {
     outline: 0!important;
     box-shadow: none!important;
+}
+
+.material-icons.md1::before{
+    content:"delete_outline"; 
+
+}
+.material-icons.md1:hover::before{
+    content:"delete_forever";
 }
 
 .col-placeholder {
@@ -106,6 +151,10 @@ table thead {
     display: none;
 }
 
+.f-22-icons {
+    font-size: 22px;
+}
+
 .shadow-footer {
     box-shadow: 0 -0.5rem 1rem rgba(0,0,0,.15)!important;
 }
@@ -114,12 +163,31 @@ table thead {
     border-top: 0!important;
 }
 
+.dropdown-item:hover{
+    background-color: #0d6efd!important;
+    color: #fff;
+}
+
+#delete-icon{
+    transition: transform 0.125s;
+    font-size: 28px;
+ }
+   
+ #delete-icon:hover {
+    transform: scale(1.175);
+ }
+
 #addIcon{
     font-size: 4.25rem;
 }
 
-#logoutIcon{
+#profileIcon{
     font-size: 30px;
+    color: #fff;
+}
+
+#profileIcon:hover{
+    opacity: 80%;
 }
 
 #delete{
@@ -130,8 +198,21 @@ table thead {
     overflow-y: scroll;
 }
 
-@media (min-width: 320px) { 
+#settings-icon{
+    transition: transform 0.5s;
+ }
+   
+ #settings-icon:hover {
+   color: #0d6efd!important;
+   transform: rotate(120deg);
+ }
 
+@media (min-width: 320px) { 
+    .dropdown-menu[data-bs-popper] {
+        top: 100%;
+        left: -141px;
+        margin-top: 0.125rem;
+    }
 }
 
 @media (min-width: 576px) { 

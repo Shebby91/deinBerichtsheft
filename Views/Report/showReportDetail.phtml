@@ -8,22 +8,22 @@ include dirname(__DIR__) . '/Basic/header.phtml';
                 <?= $reportName ?>
             </h2>
             <div class="d-flex justify-content-between align-items-center">
-                <button id="switchCardTable" class="btn d-flex inline-items-center mr-2">
-                    <span class="material-icons">
+                <button id="switchCardTable" class="btn d-flex inline-items-center">
+                    <span class="grow-icons material-icons">
                         format_list_numbered
                     </span>
-                    <span class="material-icons d-none">
+                    <span class="grow-icons material-icons d-none">
                         apps
                     </span>
                 </button>
-                <a class="d-flex text-decoration-none" href="?controller=Report&do=showEditReportForm&reportId=<?= urlencode($reportId) ?>&reportName=<?= urlencode($reportName) ?>"><span class="material-icons text-dark">settings</span></a>
+                <a class="d-flex btn px-1 py-0 text-decoration-none" href="?controller=Report&do=showEditReportForm&reportId=<?= urlencode($reportId) ?>&reportName=<?= urlencode($reportName) ?>"><span id="settings-icon" class="material-icons text-dark">settings</span></a>
             </div>
         </div>
         <div class="col-12"><hr></div>
         <div class="col-12 mb-5">
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-4  g-4">
                 <div class="col action">
-                    <a href="?controller=Report&do=showReportOverview" class="card card-action text-dark bg-light text-decoration-none shadow">
+                    <a href="?controller=Report&do=showReportOverview" class="card card-action grow-cards text-dark bg-light text-decoration-none shadow">
                         <div class="card-body row h-100 align-items-center">
                             <div class="col-12 card-action-hover">
                                 <h5 class="card-title text-center"><strong>Zurück zur Übersicht</strong></h5>
@@ -33,7 +33,7 @@ include dirname(__DIR__) . '/Basic/header.phtml';
                     </a>
                 </div>    
                 <div class="col action">
-                    <a href="?controller=Article&do=showNewArticleForm&reportId=<?= urlencode($reportId) ?>&reportName=<?= urlencode($reportName) ?>" class="card card-action text-dark bg-light text-decoration-none shadow">
+                    <a href="?controller=Article&do=showNewArticleForm&reportId=<?= urlencode($reportId) ?>&reportName=<?= urlencode($reportName) ?>" class="card card-action grow-cards text-dark bg-light text-decoration-none shadow">
                         <div class="card-body row h-100 align-items-center">
                             <div class="col-12 card-action-hover">
                                 <h5 class="card-title text-center"><strong>Neuer Tagesbericht</strong></h5>
@@ -43,7 +43,7 @@ include dirname(__DIR__) . '/Basic/header.phtml';
                     </a>
                 </div>
                 <div id="date-input-container" class="col action">
-                    <div  class="card card-action text-dark bg-light text-decoration-none shadow">
+                    <div  class="card card-action grow-cards text-dark bg-light text-decoration-none shadow">
                         <div class="card-body row h-100 align-items-center">
                             <div class="col-12 card-action-hover">
                                 <h5 class="card-title text-center mt-1"><strong>Suche nach Datum</strong></h5>
@@ -60,7 +60,7 @@ include dirname(__DIR__) . '/Basic/header.phtml';
                 <?php if (!empty($reportDetailData)) : ?>
                     <?php foreach ($reportDetailData as $index => $value) : ?>
                         <div class="col content-card">
-                            <a href="?controller=Article&do=showEditArticleForm&reportId=<?= urlencode($reportId) ?>&reportName=<?= urlencode($reportName) ?>&articleId=<?= urlencode($reportDetailData[$index]["articleId"]) ?>" class="card card-action text-white bg-light text-decoration-none shadow">
+                            <a href="?controller=Article&do=showEditArticleForm&reportId=<?= urlencode($reportId) ?>&reportName=<?= urlencode($reportName) ?>&articleId=<?= urlencode($reportDetailData[$index]["articleId"]) ?>" class="card card-action grow-content-cards text-white bg-light text-decoration-none shadow">
                                 <div class="card-header bg-primary">
                                     <h5 class="card-title card-title-date">Tagesbericht <?= date('d.m.Y',strtotime($reportDetailData[$index]["articleDate"])) ?></h5>
                                 </div>
@@ -71,7 +71,7 @@ include dirname(__DIR__) . '/Basic/header.phtml';
                         </div>
                     <?php endforeach; ?>
                 <?php endif; ?>
-                <div id="table-container" class="d-none w-100">
+                <div id="table-container" class="d-none w-98">
                     <table id="table" data-show-columns="true" class="table table-light table-striped shadow table-hover">
                       <thead>
                         <tr>
