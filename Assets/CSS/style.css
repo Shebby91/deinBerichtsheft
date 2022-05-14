@@ -15,11 +15,23 @@ h2{
     margin-bottom: 0;
 }
 
+ul,ol{
+    list-style: none;
+    padding-block-start: 0;
+    padding-inline-start: 0;
+    margin-bottom: 0;
+}
+
+
 table thead {
     position: -webkit-sticky;
     position: sticky;
     top: 0;
     z-index: 1
+}
+
+.break-word{
+    word-break: break-word;
 }
 
 .w-98{
@@ -33,7 +45,7 @@ table thead {
 .date-check:hover { 
     overflow: hidden;
     transform: scale(1.0125);
- }
+}
 
  .date-check.tr:hover {
 background-color: transparent;
@@ -41,6 +53,26 @@ background-color: transparent;
 .date-check.th:hover {
     background-color: transparent;
     }
+
+.btn-fixed{
+    position: fixed;
+    bottom: 16px;
+    right: 16px;
+    border: 1px solid;
+    border-radius: 100%;
+}
+
+.btn-fixed-inline{
+    display: none;
+    border: 1px solid;
+    border-radius: 100%;
+}
+
+.grow-btn { transition: all .05s ease-in-out; }
+.grow-btn:hover { 
+    transform: scale(1.1);
+    color: #0d6efd!important;
+ }
 
 .grow-icons { transition: all .05s ease-in-out; }
 .grow-icons:hover { 
@@ -151,6 +183,7 @@ background-color: transparent;
     display: none;
 }
 
+
 .f-22-icons {
     font-size: 22px;
 }
@@ -208,6 +241,9 @@ background-color: transparent;
  }
 
 @media (min-width: 320px) { 
+    body{
+        font-size: 13px;
+    }
     .dropdown-menu[data-bs-popper] {
         top: 100%;
         left: -141px;
@@ -216,13 +252,27 @@ background-color: transparent;
 }
 
 @media (min-width: 576px) { 
+    body{
+        font-size: 15px;
+    }
     #date-input-container{
         width: 100%!important;
+    }
+    .wrapper-box{
+        position: -webkit-sticky;
+        position: sticky;
+        background-color: #fff;
+        background-clip: border-box;
+        border: 1px solid rgba(0,0,0,.125);
+        border-radius: 0.25rem;
+        top: 66px;
     }
  }
 
 @media (min-width: 768px) {
-
+    body{
+        font-size: 16px;
+    }
     #date-input-container,
     .action{
         width: 33.3333333333%!important;
@@ -231,10 +281,16 @@ background-color: transparent;
  }
 
 @media (min-width: 992px) { 
-
     #date-input-container{
         width: 33.3333333333%!important;
     }
+    .btn-fixed-inline{
+        display: block;
+    }
+    .btn-fixed{
+        display: none;
+    }
+
 }
 
 @media (min-width: 1200px) { 

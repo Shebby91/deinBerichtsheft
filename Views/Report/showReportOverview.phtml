@@ -8,7 +8,9 @@ include dirname(__DIR__) . '/Basic/header.phtml';
                 Übersicht Berichtshefte
             </h2>
         </div>
-        <div class="col-12"><hr></div>
+        <div class="col-12">
+            <hr>
+        </div>
         <div class="col-12 mb-5">
             <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4  g-4">
                 <div class="col">
@@ -16,49 +18,49 @@ include dirname(__DIR__) . '/Basic/header.phtml';
                         <div class="card-body row h-100 align-items-center">
                             <div class="col-12 card-action-hover">
                                 <h5 class="card-title text-center"><strong>Neues Berichtsheft</strong></h5>
-                                <div class="col-12 text-center"><span id="addIcon" class="material-icons py-1 pr-1">add_circle_outline</span></div>  
+                                <div class="col-12 text-center"><span id="addIcon" class="material-icons py-1 pr-1">add_circle_outline</span></div>
                             </div>
                         </div>
                     </a>
                 </div>
                 <?php if (!empty($reportOverviewData)) : ?>
                     <?php foreach ($reportOverviewData as $index => $value) : ?>
-                    <div class="col">
-                        <a href="?controller=Report&do=showReportDetail&reportId=<?= urlencode($reportOverviewData[$index]["reportId"])?>&reportName=<?= urlencode($reportOverviewData[$index]["reportName"])?>" class="card card-action grow-content-cards text-white bg-light text-decoration-none shadow">
-                            <div class="card-header bg-primary">
-                                <h5 class="card-title text-white">
-                                    <?php if (strlen($reportOverviewData[$index]["reportName"]) > 20)  : ?> 
-                                    <?= substr($reportOverviewData[$index]["reportName"],0,20)."..." ?>
-                                    <?php else : ?> 
-                                        <?= $reportOverviewData[$index]["reportName"] ?>
-                                    <?php endif; ?>
-                                </h5>
-                            </div>
-                            <div class="card-body py-2">
-                                <strong>
-                                <p class="card-text text-dark mb-0">
-                                    <?php if (strlen($reportOverviewData[$index]["reportDescription"]) > 43)  : ?> 
-                                    <?= substr($reportOverviewData[$index]["reportDescription"],0,43)."..." ?>
-                                    <?php else : ?> 
-                                        <?= $reportOverviewData[$index]["reportDescription"] ?>
-                                    <?php endif; ?>
-                                </p>
-                                </strong>
-                                
-                            </div>
-                            <div class="card-footer border-0 bg-transparent">
-                            <small class="text-dark">  
-                                <?= $reportEntries[$index] ?>
-                                <?php if ($reportEntries[$index] == 1)  : ?> 
-                                    Eintrag
-                                <?php else : ?> 
-                                    Einträge
-                                <?php endif; ?>
-                                </small><br>
-                                <small class="text-dark">Erstellt am: <?= date('d.m.Y h:m:s',strtotime($reportOverviewData[$index]["reportCreatedAt"])) ?></small>
-                            </div>
-                        </a>
-                    </div>
+                        <div class="col">
+                            <a href="?controller=Report&do=showReportDetail&reportId=<?= urlencode($reportOverviewData[$index]["reportId"]) ?>&reportName=<?= urlencode($reportOverviewData[$index]["reportName"]) ?>" class="card card-action grow-content-cards text-white bg-light text-decoration-none shadow">
+                                <div class="card-header bg-primary">
+                                    <h5 class="card-title text-white">
+                                        <?php if (strlen($reportOverviewData[$index]["reportName"]) > 20) : ?>
+                                            <?= substr($reportOverviewData[$index]["reportName"], 0, 20) . "..." ?>
+                                        <?php else : ?>
+                                            <?= $reportOverviewData[$index]["reportName"] ?>
+                                        <?php endif; ?>
+                                    </h5>
+                                </div>
+                                <div class="card-body py-2">
+                                    <strong>
+                                        <p class="card-text text-dark mb-0">
+                                            <?php if (strlen($reportOverviewData[$index]["reportDescription"]) > 43) : ?>
+                                                <?= substr($reportOverviewData[$index]["reportDescription"], 0, 43) . "..." ?>
+                                            <?php else : ?>
+                                                <?= $reportOverviewData[$index]["reportDescription"] ?>
+                                            <?php endif; ?>
+                                        </p>
+                                    </strong>
+
+                                </div>
+                                <div class="card-footer border-0 bg-transparent">
+                                    <small class="text-dark">
+                                        <?= $reportEntries[$index] ?>
+                                        <?php if ($reportEntries[$index] == 1) : ?>
+                                            Eintrag
+                                        <?php else : ?>
+                                            Einträge
+                                        <?php endif; ?>
+                                    </small><br>
+                                    <small class="text-dark">Erstellt am: <?= date('d.m.Y h:m:s', strtotime($reportOverviewData[$index]["reportCreatedAt"])) ?></small>
+                                </div>
+                            </a>
+                        </div>
                     <?php endforeach; ?>
                 <?php endif; ?>
             </div>

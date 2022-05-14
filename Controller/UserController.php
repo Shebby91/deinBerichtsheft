@@ -155,6 +155,11 @@ class UserController
         session_destroy();
     }
 
+    public function showDataPrivacyInformation()
+    {       
+
+    }
+
     public function validateRegistrationForm(){
         foreach ($this->registrationLabels as $index => $value) {
             if (!isset($_POST[$index]) || empty($_POST[$index])) {
