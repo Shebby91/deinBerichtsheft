@@ -11,20 +11,24 @@ h5{
 }
 
 h2{
-    font-size: 1.75rem;
+    font-size: 1.35rem;
     margin-bottom: 0;
 }
 
-#addIcon{
-    font-size: 4.25rem;
+table thead {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1
 }
 
-#logoutIcon{
-    font-size: 30px;
+.bg-transparent:focus+.btn, .btn:focus {
+    outline: 0!important;
+    box-shadow: none!important;
 }
 
-#delete{
-    font-size: 1.75rem;
+.col-placeholder {
+    display: none;
 }
 
 .card-action-hover:hover{
@@ -106,33 +110,59 @@ h2{
     box-shadow: 0 -0.5rem 1rem rgba(0,0,0,.15)!important;
 }
 
-table thead {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
-    z-index: 1
-}
-
 .table>:not(:first-child) {
     border-top: 0!important;
 }
 
+#addIcon{
+    font-size: 4.25rem;
+}
+
+#logoutIcon{
+    font-size: 30px;
+}
+
+#delete{
+    font-size: 1.75rem;
+}
 #table-container{
     min-height: 120px!important;
     overflow-y: scroll;
 }
 
-/*Small devices (small phones, 320px and up)*/
 @media (min-width: 320px) { 
-    .col-placeholder {
-        display: none;
+
+}
+
+@media (min-width: 576px) { 
+    #date-input-container{
+        width: 100%!important;
+    }
+ }
+
+@media (min-width: 768px) {
+
+    #date-input-container,
+    .action{
+        width: 33.3333333333%!important;
+    }
+
+ }
+
+@media (min-width: 992px) { 
+
+    #date-input-container{
+        width: 33.3333333333%!important;
     }
 }
 
-/*X-Large devices (large desktops, 1200px and up)*/
 @media (min-width: 1200px) { 
     .col-placeholder {
         display: block;
+    }
+    #date-input-container,
+    .action{
+        width: 25%!important;
     }
 }
 

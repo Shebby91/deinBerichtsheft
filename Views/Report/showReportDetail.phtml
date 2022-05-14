@@ -21,7 +21,7 @@ include dirname(__DIR__) . '/Basic/header.phtml';
         </div>
         <div class="col-12"><hr></div>
         <div class="col-12 mb-5">
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4  g-4">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-4  g-4">
                 <div class="col action">
                     <a href="?controller=Report&do=showReportOverview" class="card card-action text-dark bg-light text-decoration-none shadow">
                         <div class="card-body row h-100 align-items-center">
@@ -42,7 +42,7 @@ include dirname(__DIR__) . '/Basic/header.phtml';
                         </div>
                     </a>
                 </div>
-                <div class="col action">
+                <div id="date-input-container" class="col action">
                     <div  class="card card-action text-dark bg-light text-decoration-none shadow">
                         <div class="card-body row h-100 align-items-center">
                             <div class="col-12 card-action-hover">
@@ -65,7 +65,7 @@ include dirname(__DIR__) . '/Basic/header.phtml';
                                     <h5 class="card-title card-title-date">Tagesbericht <?= date('d.m.Y',strtotime($reportDetailData[$index]["articleDate"])) ?></h5>
                                 </div>
                                 <div class="card-body"> 
-                                    <p class="card-text text-dark mb-1"><?= substr($reportDetailData[$index]["articleText"], 0, 60)."..." ?></p>
+                                    <p class="card-text text-dark mb-1"><?= substr($reportDetailData[$index]["articleText"], 0, 50)."..." ?></p>
                                 </div>                           
                             </a>
                         </div>

@@ -145,17 +145,18 @@ function updateOrientation() {
   var mql = window.matchMedia("(orientation: portrait)");
 
   if(mql.matches) {  
-    if (window.innerHeight >= 480) { 
-      tableContainer.style.height = window.innerHeight - (window.innerHeight*0.5) + "px";
-    }
-    if (window.innerHeight >= 1024) { 
+    if (window.innerWidth >= 576) { 
       tableContainer.style.height = window.innerHeight - (window.innerHeight*1.9) + "px";
-    }  
+      tableContainer.style.height = 280+ "px";
+    }
+    if (window.innerWidth >= 768) { 
+      tableContainer.style.height = window.innerHeight -475 + "px";
+    }
   } else {  
     if (window.innerHeight >= 684) { 
       tableContainer.style.height = window.innerHeight - (window.innerHeight*1.9) + "px";
     } 
-    tableContainer.style.height = window.innerHeight -525 + "px";
+    tableContainer.style.height = window.innerHeight -475 + "px";
   }
 }
 
