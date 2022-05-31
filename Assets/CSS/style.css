@@ -202,9 +202,44 @@ background-color: transparent;
 }
 
 .dropdown-menu[data-bs-popper] {
-    top: 100%;
+    top: 150%;
     left: -130px!important;
     margin-top: -0.525rem!important;
+}
+
+#user-img-nav{
+    width: auto;
+    max-height: 30px;
+    border-radius: 15px;
+}
+
+#user-img-container-nav{
+    width: 35px;
+    height: 35px;
+}
+
+#user-profile-img-nav{
+    width: 35px;
+    height: 35px;
+    border-radius: 50px;
+}
+
+#user-img{
+    max-width: 70px;
+    height: auto;
+    border-radius: 35px;
+}
+
+#user-img-container{
+    width: 80px;
+    height: 80px;
+}
+
+#user-profile-img{
+    width: 80px;
+    height: 80px;
+    border-radius: 50px;
+    box-shadow: 0 0 1rem rgba(0,0,0,.15)!important;
 }
 
 #delete-icon{
@@ -251,7 +286,6 @@ background-color: transparent;
         font-size: 14px;
     }
     .dropdown-menu[data-bs-popper] {
-        top: 100%;
         left: -141px;
         margin-top: 0.125rem;
     }

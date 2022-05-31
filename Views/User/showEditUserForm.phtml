@@ -1,0 +1,61 @@
+<?php
+include dirname(__DIR__) . '/Basic/header.phtml';
+?>
+<div class="container">
+    <div class="row pt-5 px-2 justify-content-center">
+        <div class="col-12">
+            <h2>
+                Profil bearbeiten
+            </h2> 
+        </div>
+        <div class="col-12"><hr></div>
+        <div class="col-12">
+            <div class="card card-start card-report text-start mb-5 shadow">
+                <div class="card-body">
+                    <form id="editUserForm" method="post" enctype="multipart/form-data">
+                        <div id="user-profile-img" class="d-flex justify-content-center mx-auto">
+                            <div id="user-img-container" class="d-flex justify-content-center align-items-center"> 
+                                <?php if (isset($_SESSION["userImg"])): ?>   
+                                    <img id="user-img" class="" src="<?=$_SESSION["userImg"]?>" alt="">     
+                                <?php else: ?>
+                                    <img id="user-img" class="" src="../../Assets/images/user.jpg" alt="">   
+                                <?php endif; ?>
+                            </div>
+                        </div>
+
+                        <?php foreach ($editUserLabels as $index => $value): ?>
+                        <div class="mb-3">
+                        <label class="form-label" for="<?=$index?>"><?=$value?></label>
+                        <?php if (substr($index,4,3) == "Img"): ?>
+                            <input type="file" class="form-control" id="<?=$index?>" name="<?=$index?>" placeholder="<?=$value?>">
+                            <?php if (isset($editUserErrors[$index])): ?><div id="emailHelp" class="form-text"><?=$editUserErrors[$index]?></div><?php endif; ?>
+                        </div>
+                        <?php elseif (substr($index,4,3) == "Pwd"): ?>
+                            <input type="password" class="form-control" id="<?=$index?>" name="<?=$index?>" placeholder="<?=$value?>" value="">
+                            <?php if (isset($editUserErrors[$index])): ?><div id="emailHelp" class="form-text"><?=$editUserErrors[$index]?></div><?php endif; ?>
+                        </div>
+                        <?php elseif (substr($index,4,5) == "Email"): ?>
+                            <input type="email" class="form-control" id="<?=$index?>" name="<?=$index?>" placeholder="<?=$value?>" value="<?=$_SESSION["userEmail"]?>">
+                            <?php if (isset($editUserErrors[$index])): ?><div id="emailHelp" class="form-text"><?=$editUserErrors[$index]?></div><?php endif; ?>
+                        </div>
+                        <?php else: ?>
+                            <input type="text" class="form-control" id="<?=$index?>" name="<?=$index?>" placeholder="<?=$value?>" value="<?=$_SESSION["userName"]?>">
+                            <?php if (isset($editUserErrors[$index])): ?><div id="emailHelp" class="form-text"><?=$editUserErrors[$index]?></div><?php endif; ?>
+                        </div>
+                        <?php endif; ?>
+                        <?php endforeach; ?>                       
+                        <input type="hidden" name="controller" value="user">       
+                        <input type="hidden" name="do" value="validateEditUserForm">                
+                    </form>
+                </div>
+            <div class="card-footer d-flex justify-content-between text-muted">
+                <a href="?controller=Report&do=showReportOverview" class="btn btn-sm btn-outline-primary d-flex align-items-center"><span>Zurück zur Übersicht</span></a>
+                <input type="submit" form="editUserForm" class="btn btn-primary" name="submit" value="Absenden">
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<?php include dirname(__DIR__) . '/Basic/footer.phtml'; ?>
+<?php include dirname(__DIR__) . '/Includes/navbarActiveState.phtml'; ?>
+<?php include dirname(__DIR__) . '/Basic/footerEnd.phtml'; ?>

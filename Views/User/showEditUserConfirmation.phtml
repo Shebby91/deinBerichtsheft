@@ -9,7 +9,7 @@ include dirname(__DIR__) . '/Basic/header.phtml';
           <div class="spinner-grow text-primary" role="status">
             <span class="visually-hidden">Loading...</span>
           </div>
-          <h4 class="text-muted mt-2">E-Mail wird gesendet...</h4>
+          <h4 class="text-muted mt-2">Deine Daten werden gespeichert...</h4>
         </div>
       </div>
     </div>
@@ -20,15 +20,9 @@ include dirname(__DIR__) . '/Basic/header.phtml';
     <div class="middle">
       <div class="col-12 text-center mx-auto">
         <h3 class="text-secondary px-2">
-          Überprüfe dein Postfach.<br>
-          Wir haben dir eine E-Mail gesendet.
+          Deine Daten wurden erfolgreich gespeichert.
         </h3>
-        <a class="btn btn-primary mt-3" href="?controller=User&do=showLoginForm">Hier geht's zum Login</a>
-        <hr>        
-        <h3 class="text-secondary px-2">
-          Zu Testzwecken bitte untenstehenden Button clicken.
-        </h3>
-        <a class="btn btn-success mt-3" href="<?= $_SESSION["url"] ?>">Hier geht's weiter</a>
+        <a class="btn btn-primary mt-3" href="?controller=Report&do=showReportOverview">Hier geht's zu deiner Übersicht</a>
       </div>
     </div>
   </div>

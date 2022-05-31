@@ -117,6 +117,9 @@ class UserModel extends Database
             $_SESSION["userId"] = $user[0]["userId"];
             $_SESSION["userEmail"] = $user[0]["userEmail"];
             $_SESSION["tableView"] = false;
+            if($user[0]["userImg"] !== null){
+                $_SESSION["userImg"] = $user[0]["userImg"];
+            }
             return true;
         }
 
@@ -164,7 +167,7 @@ class UserModel extends Database
             new \deinBerichtsheft\Library\ErrorMsg("Fehler beim Schreiben der Daten.", $e); 
             die;
         }
-        // EMAIL SENDEN IF $_SESSION["emailSend] = true
+
         /*
         $mail = new PHPMailer(true);
 
@@ -175,7 +178,6 @@ class UserModel extends Database
             $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
             $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
             $mail->Username   = 'deinberichtsheftde@gmail.com';                     //SMTP username
-            $mail->Password   = 'dB.deietS';                               //SMTP password
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;             //Enable implicit TLS encryption
             $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
         
@@ -230,6 +232,7 @@ class UserModel extends Database
         }
     */
         $_SESSION["pwdResetReqeuestSuccessfull"] = true;
+        $_SESSION["url"] =  $url;
         return true;
 
     }
@@ -410,6 +413,42 @@ class UserModel extends Database
 */
         $_SESSION["registeredSuccessfully"] = true;
 
+        return true;
+    }
+
+    public function updateUser($values)
+    {
+        
+        
+        $user = $_SESSION["userName"];
+
+        if ($user == null || empty($user)) {
+            return false;
+        }
+    
+        $pdo = $this->linkDB();
+
+        try {
+            if(!isset($values["userImg"])){
+                $sth = $pdo->prepare('UPDATE user SET userName = :user, userEmail = :mail WHERE userId = :id;');
+                $sth->execute(array(":user" => $values["userName"], ":mail" => $values["userEmail"], ":id" => $_SESSION["userId"]));
+            } else {
+                $sth = $pdo->prepare('UPDATE user SET userName = :user, userEmail = :mail, userImg = :img WHERE userId = :id;');
+                $sth->execute(array(":user" => $values["userName"], ":mail" => $values["userEmail"], ":img" => $values["userImg"], ":id" => $_SESSION["userId"]));
+            }
+
+        } catch (PDOException $e) {
+            new \deinBerichtsheft\Library\ErrorMsg("Fehler beim Abrufen der Daten.", $e); 
+            die;
+        }
+
+        $_SESSION["userName"] = $values["userName"];
+        $_SESSION["userEmail"] = $values["userEmail"];
+
+        if(isset($values["userImg"])){
+            $_SESSION["userImg"] = $values["userImg"];
+        }
+        
         return true;
     }
 }

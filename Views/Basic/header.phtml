@@ -17,27 +17,23 @@
                 <?php if(isset($_SESSION["userId"])) { ?>
                     <div class="justify-content-end" id="navbarNavAltMarkup">
                         <div class="btn-group">
-                          <button type="button" class="btn border-0 p-0" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
-                            <a class="nav-link p-0" href="#">
-                                <span id="profileIcon" class="material-icons">account_circle</span>
-                            </a>
+                          <button type="button" id="user-profile-img-nav" class="btn border-0 p-0 d-flex justify-content-center" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                            <div id="user-img-container-nav" class="d-flex justify-content-center align-items-center"> 
+                                <?php if (isset($_SESSION["userImg"])): ?>   
+                                    <img id="user-img-nav" class="" src="<?=$_SESSION["userImg"]?>" alt="">     
+                                <?php else: ?>
+                                    <img id="user-img-nav" class="" src="../Uploads/user.jpg" alt="">   
+                                <?php endif; ?>
+                            </div>           
                           </button>
                           <ul class="dropdown-menu dropdown-menu-sm-end pt-1">
                             <li>
-                                <button class="dropdown-item d-flex align-items-center px-1" type="button">
+                                <a class="dropdown-item d-flex align-items-center px-1" href="?controller=User&do=showEditUserForm">
                                     <span class="material-icons px-1">
                                         manage_accounts
                                     </span>
                                     Profil bearbeiten
-                                </button>
-                            </li>
-                            <li>
-                                <button class="dropdown-item d-flex align-items-center px-1" type="button">
-                                    <span class="material-icons px-1 f-22-icons">
-                                        settings
-                                    </span>
-                                        Einstellungen
-                                </button>
+                                </a>
                             </li>
                             <li>
                                 <a class="dropdown-item d-flex align-items-center px-1" href="?controller=User&do=showLogoutConfirmation">
@@ -50,10 +46,7 @@
                           </ul>
                         </div>
                     </div>
-                    <!--<div class="navbar-nav">
-                        <a class="nav-link p-0" href="?controller=User&do=showLogoutConfirmation"><span id="logoutIcon" class="material-icons mt-1">logout</span></a>
-                    </div>-->
-                    <?php } ?>
+                <?php } ?>
         </div>
     </nav>
 

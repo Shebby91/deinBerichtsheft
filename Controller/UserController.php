@@ -9,6 +9,10 @@ class UserController
     protected $view;
     private $db;
 
+    private $editUserValidData = array();
+    private $editUserErrors = array();
+    private $editUserLabels = array("userImg" => "Profilbild", "userName" => "Benutzername", "userEmail" => "E-Mail-Adresse");	
+
     private $registrationValidData = array();
     private $registrationErrors = array();
     private $registrationLabels = array("userName" => "Benutzername", "userEmail" => "E-Mail-Adresse", "userPwd" => "Passwort", "userPwdRepeat" => "Passwort wiederholen");	
@@ -31,6 +35,19 @@ class UserController
         $this->db = new UserModel();
         $this->view = $view;
     }
+
+    public function showEditUserForm()
+    {   
+        if(!isset($_SESSION["userId"])) {
+            header("location: ../index.php?controller=User&do=showLoginForm");
+        }
+
+        $this->view->setVars([
+            'editUserLabels' => $this->editUserLabels,
+            'editUserValidData' => $this->editUserValidData,
+            'editUserErrors' => $this->editUserErrors
+        ]);
+    } 
 
     public function showRegistrationForm()
     {   
@@ -110,6 +127,11 @@ class UserController
 
     }
 
+    public function showEditUserConfirmation()
+    {       
+        
+    }
+
     public function showRegistrationConfirmation()
     {       
         if(!isset($_SESSION["registeredSuccessfully"])) {
@@ -136,11 +158,12 @@ class UserController
         if(!isset($_SESSION["pwdResetReqeuestSuccessfull"])) {
             header("location: ../index.php?controller=User&do=showLoginForm");
         } 
-        
+        $url = $_SESSION["url"];
         session_unset();
         session_destroy();
 
         session_start();
+        $_SESSION["url"] = $url;
         $expires = date("U") + 900;
         $_SESSION["mailSend"] = $expires;
     }
@@ -159,6 +182,80 @@ class UserController
     {       
 
     }
+
+    public function validateUserImage($index){
+        $target_dir = "Uploads/";
+        $target_file = null;
+        $imageFileType = null;
+        $uploadOk = true;;
+
+        $check = getimagesize($_FILES["userImg"]["tmp_name"]);        
+        $target_file = $target_dir . uniqid(true) . basename($_FILES["userImg"]["name"]);
+        $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+
+        if($check !== false) {
+            $uploadOk = true;
+        } else {
+            $uploadOk = false;
+            $this->editUserErrors[$index] = "Datei ist kein Bild.";
+        }
+
+        if (file_exists($target_file)) {
+            $uploadOk = false;
+            $this->editUserErrors[$index] = "Dieses Bild ist bereits vorhanden.";
+        }
+
+        if ($_FILES["userImg"]["size"] > 500000) {
+            $uploadOk = false;
+            $this->editUserErrors[$index] = "Bild ist zu groß. (max. 5mb)"; 
+        }
+
+        if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
+            $uploadOk = false;
+            $this->editUserErrors[$index] = "Bitte nur folgende Dateiformate verwenden. (JPG, JPEG, PNG) ";
+        }
+
+        if($uploadOk){
+            move_uploaded_file($_FILES[$index]["tmp_name"], $target_file);
+            $this->editUserValidData[$index] = $target_file;
+        }
+    }
+
+
+    public function validateEditUserForm(){
+        foreach ($this->editUserLabels as $index => $value) {
+            if (!isset($_POST["userName"]) || empty($_POST["userEmail"])) {
+                $this->editUserErrors[$index] = "Bitte " . $value . " angeben";
+            } else if ($index == "userEmail" && !filter_var($_POST[$index], FILTER_VALIDATE_EMAIL)){
+                $this->editUserErrors[$index] = "E-Mail-Adresse ist ung&uuml;ltig";
+            } else {
+                if($index !== "userImg"){
+                    $this->editUserValidData[$index] = $_POST[$index];
+                }
+                
+            }       
+        }
+
+        if(strlen($_FILES["userImg"]["name"]) !== 0){
+            $this->validateUserImage("userImg");
+        }
+        
+
+        if (count($this->editUserErrors) > 0) {
+            $this->view->setDoMethodName("showEditUserForm");
+            $this->showEditUserForm();
+        } else {
+            if (!$this->db->updateUser($this->editUserValidData)) {
+                new \deinBerichtsheft\Library\ErrorMsg('Deine Änderungen konnten nicht gespeichert werden. Bitte versuche es erneut oder wende dich an den Support.'); 
+                die;
+            } else{
+                $this->view->setDoMethodName("showEditUserConfirmation");
+                $this->showEditUserConfirmation();
+            }
+        }
+    }
+
+
 
     public function validateRegistrationForm(){
         foreach ($this->registrationLabels as $index => $value) {
